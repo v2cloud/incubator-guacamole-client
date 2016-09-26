@@ -74,6 +74,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         CTRL_KEYS   = {0xFFE3 : true, 0xFFE4 : true},
         MENU_KEYS   = angular.extend({}, SHIFT_KEYS, ALT_KEYS, CTRL_KEYS);
 
+
     /**
      * All client error codes handled and passed off for translation. Any error
      * code not present in this list will be represented by the "DEFAULT"
@@ -209,7 +210,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          * @type Boolean
          */
         shown : false,
-
+        
         /**
          * Whether the Guacamole display should be scaled to fit the browser
          * window.
@@ -234,6 +235,14 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         scrollState : new ScrollState()
 
     };
+     
+    /**
+    * Whether the task bar is currently shown.
+    *
+    * @type Boolean
+    */
+    $scope.taskBarShown = true;
+
 
     // Convenience method for closing the menu
     $scope.closeMenu = function closeMenu() {
@@ -276,16 +285,22 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     var clipboardDataFromKey = {};
 
     /*
-     * Check to see if all currently pressed keys are in the set of menu keys.
-     */  
-    function checkMenuModeActive() {
+     * Check to see if all currently pressed keys are in the given set keys.
+     */
+    function checkPressedKeys(keysSet) {
         for(var keysym in keysCurrentlyPressed) {
-            if(!MENU_KEYS[keysym]) {
+            if(!keysSet[keysym]) {
                 return false;
             }
         }
-        
+
         return true;
+    }
+    /*
+     * Check to see if all currently pressed keys are in the set of menu keys.
+     */
+    function checkMenuModeActive() {
+        return checkPressedKeys(MENU_KEYS);
     }
 
     // Hide menu when the user swipes from the right
@@ -413,7 +428,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         $scope.client.clientProperties.keyboardEnabled = !menuShown;
 
     });
-
+            
     // Update page icon when thumbnail changes
     $scope.$watch('client.thumbnail.canvas', function thumbnailChanged(canvas) {
         iconService.setIcons(canvas);
@@ -521,7 +536,6 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
                 });
             }
         }
-
     });
 
     // Update pressed keys as they are released, synchronizing the clipboard

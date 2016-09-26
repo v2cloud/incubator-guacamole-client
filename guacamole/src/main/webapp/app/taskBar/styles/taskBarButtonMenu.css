@@ -1,0 +1,88 @@
+.task-bar-button-menu {
+    min-width: 200px;
+    bottom: 40px;
+    left: -2px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(170, 170, 170, 0.36);
+    border-bottom:none;
+    list-style: none;
+    opacity: 0;
+    z-index: -1;
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+.task-bar-button-menu.open {
+    opacity: 1;
+    z-index: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    -o-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+
+.task-bar-button-menu li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.task-bar-button-menu li a.task-bar-button-action {
+    color: white;
+    font-size: 16px;
+    display: block;
+    padding: 15px 0 15px 30px;
+}
+
+.task-bar-button-menu li a.task-bar-button-action:hover,
+.task-bar-button-menu li a.task-bar-button-action:focus {
+    background: #232222;
+    text-decoration: none;
+    -webkit-transition: background 0.3s ease;
+    -moz-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+    outline: none;
+}
+
+.task-bar-button-menu li a.task-bar-button-action i {
+    margin-right: 15px;
+}
+
+.task-bar-button-menu li a.task-bar-button-action i div.action-image {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    background-size: contain;
+    background: no-repeat center;
+    display: inline-block;
+}
+
+.task-bar-button-menu li a.task-bar-button-action.full-screen-action i div {
+    background-image: url("images/action-icons/v2c-fullscreen.png");
+}
+
+.task-bar-button-menu li a.task-bar-button-action.reload-page-action i div {
+    background-image: url("images/action-icons/v2c-reload-page.png");
+}
+
+.task-bar-button-menu li a.task-bar-button-action.file-transfer-action i div{
+    background-image: url("images/action-icons/v2c-file-transfer.png");
+}
+
+.task-bar-button-menu li a.task-bar-button-action.help-action i div {
+    background-image: url("images/action-icons/v2c-help.png");
+}
+
+.task-bar-button-menu li a.task-bar-button-action.logout-action  i div{
+    background-image: url("images/action-icons/v2c-logout.png");
+}

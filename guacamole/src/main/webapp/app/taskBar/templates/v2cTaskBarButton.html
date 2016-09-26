@@ -1,0 +1,10 @@
+<div class="task-bar-button-container">
+    <ul class="task-bar-button-menu" ng-class="{open: menuShown}">
+        <li ng-repeat="action in button.actions">
+            <a ng-class="action.className" ng-click="action.callback()">
+                <i><div class="action-image"></div></i>{{action.name | translate}}
+            </a>
+        </li>
+    </ul>
+    <button ng-class="button.className" ng-click="toggleButtonMenu()" ></button>
+</div>sSSS

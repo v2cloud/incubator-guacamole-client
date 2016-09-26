@@ -18,18 +18,6 @@
  */
 
 /**
- * The module for code used to connect to a connection or balancing group.
+ * Module for displaying the V2CLoud task bar method.
  */
-angular.module('client', [
-    'auth',
-    'clipboard',
-    'element',
-    'history',
-    'navigation',
-    'notification',
-    'osk',
-    'rest',
-    'textInput',
-    'touch',
-    'taskBar'
-]);
+angular.module('taskBar', []);
