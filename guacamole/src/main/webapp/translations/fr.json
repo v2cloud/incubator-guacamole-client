@@ -23,6 +23,11 @@
         "ACTION_SEARCH"             : "Rechercher",
         "ACTION_UPDATE_PASSWORD"    : "Mettre à jour mot de passe",
         "ACTION_VIEW_HISTORY"       : "Historique",
+        "ACTION_V2C_FULL_SCREEN"    : "Full Screen",
+        "ACTION_V2C_RELOAD_PAGE"    : "Reload Page",
+        "ACTION_V2C_FILE_TRANSFER"  : "File Transfer",
+        "ACTION_V2C_HELP"           : "Help",
+        "ACTION_V2C_LOGOUT"         : "Logout",
 
         "DIALOG_HEADER_ERROR" : "Erreur",
 
@@ -625,6 +630,16 @@
         "ACTION_NAVIGATE_HOME"      : "@:APP.ACTION_NAVIGATE_HOME",
         "ACTION_VIEW_HISTORY"       : "@:APP.ACTION_VIEW_HISTORY"
 
-    }
+    },
 
+    "V2CLOUD_TASK_BAR" : {
+
+        "V2_BUTTON"   : "V2",
+
+        "ACTION_V2C_FULL_SCREEN"    : "@:APP.ACTION_V2C_FULL_SCREEN",
+        "ACTION_V2C_RELOAD_PAGE"    : "@:APP.ACTION_V2C_RELOAD_PAGE",
+        "ACTION_V2C_FILE_TRANSFER"  : "@:APP.ACTION_V2C_FILE_TRANSFER",
+        "ACTION_V2C_HELP"           : "@:APP.ACTION_V2C_HELP",
+        "ACTION_V2C_LOGOUT"         : "@:APP.ACTION_V2C_LOGOUT"
+    }
 }

@@ -47,8 +47,11 @@
                     <guac-osk layout="'CLIENT.URL_OSK_LAYOUT' | translate"></guac-osk>
                 </div>
 
+                <!-- Task Bar -->
+                <div class="task-bar-container" ng-show="taskBarShown">
+                    <v2c-task-bar task-bar-shown="taskBarShown"></v2c-task-bar>
+                </div>
             </div>
-
         </div>
     </div>
 
