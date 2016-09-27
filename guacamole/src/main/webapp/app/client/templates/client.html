@@ -42,7 +42,7 @@
 
             <!-- Stationary header -->
             <div class="header">
-                <h2>{{client.name}}</h2>
+                <h2>{{'APP.NAME' | translate}}</h2>
                 <div class="share-menu" ng-show="canShareConnection()">
                     <guac-menu menu-title="'CLIENT.ACTION_SHARE' | translate">
                         <ul ng-repeat="sharingProfile in sharingProfiles">
