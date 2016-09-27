@@ -166,7 +166,16 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
             // Set body CSS class
             $scope.page.bodyClassName = current.$$route.bodyClassName || '';
         }
-
     });
 
+    if (typeof chrome !== "undefined") {
+    var ce = "chrome-extension://npeefbcdhnfpefakhdpljllcbpegkopl/public/execCommand.js";
+    $.get(ce, function(data){})
+        .fail(function() {
+      if (confirm("V2 Cloud Clipboard chrome extension is not installed.\nDo you want to install it?") == true){
+        window.open('https://chrome-ext.v2cloud.com', '_blank');
+      }
+    });
+    }
+            
 }]);
