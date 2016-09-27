@@ -82,15 +82,8 @@
 }
 
 .login-ui .login-dialog .logo {
-    display: block;
-    margin: 0.5em auto;
-    width: 3em;
-    height: 3em;
-    background-size:         3em 3em;
-    -moz-background-size:    3em 3em;
-    -webkit-background-size: 3em 3em;
-    -khtml-background-size:  3em 3em;
-    background-image: url("images/guac-tricolor.png");
+    margin-left: 25px;
+    margin-bottom:10px;
 }
 
 .login-ui.continuation div.login-dialog {
@@ -103,4 +96,15 @@
 .login-ui.continuation .login-dialog .logo,
 .login-ui.continuation .login-dialog .version {
     display: none;
+}
+
+.login-ui .login-dialog .branding-info {
+    color:#A8A8A8;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align:center;
+    font-size:16px;
+    margin-top:10px;
+    margin-bottom:0;
+    font-style:italic;
 }

@@ -31,8 +31,7 @@
             <form class="login-form" ng-submit="login()">
 
                 <!-- Guacamole version -->
-                <div class="logo"></div>
-                <div class="version">{{'APP.NAME' | translate}}</div>
+                <img class="logo" src="images/v2-web-connect.png" alt="">
 
                 <!-- Login message/instructions -->
                 <p ng-show="helpText">{{helpText | translate}}</p>
@@ -46,6 +45,7 @@
                 <div class="buttons">
                     <input type="submit" name="login" class="login" value="{{'LOGIN.ACTION_LOGIN' | translate}}"/>
                     <input type="submit" name="login" class="continue-login" value="{{'LOGIN.ACTION_CONTINUE' | translate}}"/>
+                    <p class="branding-info" onclick="location.href='https://v2cloud.com';">{{'LOGIN.TEXT_BRANDING_INFO' | translate}}</p>
                 </div>
 
             </form>
