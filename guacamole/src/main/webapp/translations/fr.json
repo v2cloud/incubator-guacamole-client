@@ -38,8 +38,9 @@
 
         "INFO_ACTIVE_USER_COUNT" : "Actuellement utilisé par {USERS} {USERS, plural, one{utilisateur} other{utilisateurs}}.",
 
-        "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{seconde} other{secondes}}} minute{{VALUE, plural, one{minute} other{minutes}}} hour{{VALUE, plural, one{heure} other{heures}}} day{{VALUE, plural, one{jour} other{jours}}} other{}}"
+        "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{seconde} other{secondes}}} minute{{VALUE, plural, one{minute} other{minutes}}} hour{{VALUE, plural, one{heure} other{heures}}} day{{VALUE, plural, one{jour} other{jours}}} other{}}",
 
+        "TEXT_BRANDING_INFO" : "Optimisé par v2cloud.com"
     },
 
     "CLIENT" : {
@@ -170,7 +171,9 @@
         "ERROR_INVALID_LOGIN" : "Identifiant Incorrect",
 
         "FIELD_HEADER_USERNAME" : "Identifiant",
-        "FIELD_HEADER_PASSWORD" : "Mot de passe"
+        "FIELD_HEADER_PASSWORD" : "Mot de passe",
+
+        "TEXT_BRANDING_INFO" : "@:APP.TEXT_BRANDING_INFO"
 
     },
 
