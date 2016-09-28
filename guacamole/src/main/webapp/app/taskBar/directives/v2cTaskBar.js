@@ -43,11 +43,10 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             taskBarShown : '='
         },
         templateUrl: 'app/taskBar/templates/v2cTaskBar.html',
-        controller: ['$scope', '$uibModal', function v2cTaskBarController($scope, $uibModal) {
+        controller: ['$scope', 'v2cDialogService', function v2cTaskBarController($scope, v2cDialogService) {
 
             $scope.shown = $scope.taskBarShown;
             
-            $scope.emptyFunc = function(){ return undefined;};
 
             /**
              * Action which toggle the fullscreen mode.
@@ -55,17 +54,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             var FULL_SCREEN_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_FULL_SCREEN',
                 className : 'task-bar-button-action full-screen-action',
-                callback: function () {
-                    var modalInstance = $uibModal.open({
-                        //windowClass : 'fade',
-                        templateUrl:'app/dialog/templates/v2cHelpDialog.html',
-                        //windowTemplateUrl: 'app/dialog/templates/v2cModalWindow.html',
-                        size:'lg',
-                        controller: 'v2cHelpDialogController'
-                    });
-
-                    modalInstance.result.then(function () {}, function () {});
-                }                  
+                callback: v2cDialogService.showHelpDialog(function(){})
             };
             
             /**
@@ -74,7 +63,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             var RELOAD_PAGE_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_RELOAD_PAGE',
                 className : 'task-bar-button-action reload-page-action',
-                callback  : $scope.emptyFunc
+                callback  : function(){}
             };
             
             /**
@@ -83,7 +72,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             var FILE_TRANSFER_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_FILE_TRANSFER',
                 className : 'task-bar-button-action file-transfer-action',
-                callback  : $scope.emptyFunc
+                callback  : function(){}
             };
             
             /**
@@ -92,7 +81,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             var HELP_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_HELP',
                 className : 'task-bar-button-action help-action',
-                callback  : $scope.emptyFunc
+                callback  : function(){}
             };
             
             /**
@@ -102,7 +91,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             var LOGOUT_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
                 className : 'task-bar-button-action logout-action',
-                callback  : $scope.emptyFunc
+                callback  : function(){}
             };
             
             /**
