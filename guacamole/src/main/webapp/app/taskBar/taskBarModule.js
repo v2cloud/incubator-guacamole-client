@@ -20,4 +20,4 @@
 /**
  * Module for displaying the V2CLoud task bar method.
  */
-angular.module('taskBar', [ 'ui.bootstrap', 'dialog' ]);
+angular.module('taskBar', [ 'dialog' ]);
