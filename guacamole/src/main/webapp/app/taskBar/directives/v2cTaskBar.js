@@ -43,19 +43,29 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
             taskBarShown : '='
         },
         templateUrl: 'app/taskBar/templates/v2cTaskBar.html',
-        controller: ['$scope', function v2cTaskBarController($scope) {
+        controller: ['$scope', '$uibModal', function v2cTaskBarController($scope, $uibModal) {
 
             $scope.shown = $scope.taskBarShown;
             
             $scope.emptyFunc = function(){ return undefined;};
-            
+
             /**
              * Action which toggle the fullscreen mode.
              */
             var FULL_SCREEN_ACTION = {
                 name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_FULL_SCREEN',
                 className : 'task-bar-button-action full-screen-action',
-                callback  : $scope.emptyFunc
+                callback: function () {
+                    var modalInstance = $uibModal.open({
+                        //windowClass : 'fade',
+                        templateUrl:'app/dialog/templates/v2cHelpDialog.html',
+                        //windowTemplateUrl: 'app/dialog/templates/v2cModalWindow.html',
+                        size:'lg',
+                        controller: 'v2cHelpDialogController'
+                    });
+
+                    modalInstance.result.then(function () {}, function () {});
+                }                  
             };
             
             /**
