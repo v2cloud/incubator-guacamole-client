@@ -18,6 +18,11 @@
  */
 
 /**
- * Module for displaying the V2CLoud task bar method.
+ * The controller for the help dialog.
  */
-angular.module('taskBar', [ 'ui.bootstrap', 'dialog' ]);
+angular.module('dialog').controller('v2cHelpDialogController',
+    ['$scope', '$uibModalInstance', function v2cHelpDialogController($scope, $uibModalInstance) {
+        $scope.close = function () {
+            $uibModalInstance.close();
+        };
+    }]);

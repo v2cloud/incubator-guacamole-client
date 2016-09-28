@@ -23,11 +23,11 @@
         "ACTION_SEARCH"             : "Rechercher",
         "ACTION_UPDATE_PASSWORD"    : "Mettre à jour mot de passe",
         "ACTION_VIEW_HISTORY"       : "Historique",
-        "ACTION_V2C_FULL_SCREEN"    : "Full Screen",
-        "ACTION_V2C_RELOAD_PAGE"    : "Reload Page",
-        "ACTION_V2C_FILE_TRANSFER"  : "File Transfer",
-        "ACTION_V2C_HELP"           : "Help",
-        "ACTION_V2C_LOGOUT"         : "Logout",
+        "ACTION_V2C_FULL_SCREEN"    : "Plein Écran",
+        "ACTION_V2C_RELOAD_PAGE"    : "Rafraichir la page",
+        "ACTION_V2C_FILE_TRANSFER"  : "Transfert de fichier",
+        "ACTION_V2C_HELP"           : "Aide",
+        "ACTION_V2C_LOGOUT"         : "Se deconnecter",
 
         "DIALOG_HEADER_ERROR" : "Erreur",
 

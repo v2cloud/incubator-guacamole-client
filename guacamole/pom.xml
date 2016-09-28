@@ -145,6 +145,7 @@
 
                             <cssSourceFiles>
                                 <cssSourceFile>license.txt</cssSourceFile>
+                                <cssSourceFile>lib/bootstrap/bootstrap.css</cssSourceFile>
                             </cssSourceFiles>
                             
                             <cssSourceIncludes>
@@ -158,6 +159,8 @@
                             <jsSourceFiles>
                                 <jsSourceFile>lib/jquery/jquery.js</jsSourceFile>
                                 <jsSourceFile>lib/angular/angular.min.js</jsSourceFile>
+                                <jsSourceFile>lib/angular/angular-animate.js</jsSourceFile>
+                                <jsSourceFile>lib/bootstrap/ui-bootstrap-tpls-0.14.3.min.js</jsSourceFile>
                                 <jsSourceFile>lib/angular-module-shim/angular-module-shim.js</jsSourceFile>
                                 <jsSourceFile>lib/messageformat/messageformat.js</jsSourceFile>
                                 <jsSourceFile>license.txt</jsSourceFile>
@@ -172,6 +175,8 @@
 
                             <!-- Do not minify and include tests -->
                             <jsSourceExcludes>
+                                <jsSourceExclude>lib/angular/angular.js</jsSourceExclude>
+                                <jsSourceExclude>lib/bootstrap/ui-bootstrap-tpls-0.14.3.js</jsSourceExclude>
                                 <jsSourceExclude>**/*.test.js</jsSourceExclude>
                             </jsSourceExcludes>
                             <jsEngine>CLOSURE</jsEngine>
