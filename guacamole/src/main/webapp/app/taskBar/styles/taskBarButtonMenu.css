@@ -1,13 +1,14 @@
 .task-bar-button-menu {
     min-width: 200px;
     bottom: 40px;
-    left: -2px;
+    left: 0px;
     position: absolute;
-    margin: 0;
-    padding: 0;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(170, 170, 170, 0.36);
-    border-bottom:none;
+    font-weight: 300;
+    margin: 0px;
+    padding: 0px;
+    background: rgba(153, 153, 153, 0.93);
+    border: 1px solid #fcf8e3;
+    box-shadow: 0px 0px 10px 0px #fcf8e3;
     list-style: none;
     opacity: 0;
     z-index: -1;
@@ -40,7 +41,7 @@
     color: white;
     font-size: 16px;
     display: block;
-    padding: 15px 0 15px 30px;
+    padding: 8px 0 8px 20px;
 }
 
 .task-bar-button-menu li a.task-bar-button-action:hover,

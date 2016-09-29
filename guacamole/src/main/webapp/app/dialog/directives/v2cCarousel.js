@@ -18,22 +18,22 @@
  */
 
 /**
- * The module for the root of the application.
+ * A directive which displays a v2 cloud Carousel
  */
-angular.module('index', [
-    'auth',
-    'client',
-    'clipboard',
-    'home',
-    'login',
-    'manage',
-    'navigation',
-    'ngRoute',
-    'ngTouch',
-    'ngAnimate',
-    'notification',
-    'pascalprecht.translate',
-    'rest',
-    'settings',
-    'templates-main'
-]);
+angular.module('dialog').directive('v2cCarousel', [function v2cCarousel() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            /**
+             * List of slide object to display in this carousel
+             */
+            pages: '='
+
+        },
+        templateUrl: 'app/dialog/templates/v2cCarousel.html',
+        controller: ['$scope', function v2cCarouselController($scope) {
+            $scope.active = 0;
+        }]
+    }
+}]);

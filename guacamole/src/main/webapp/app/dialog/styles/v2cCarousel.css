@@ -1,0 +1,14 @@
+.carousel-indicators li {
+    border: none;
+    background: #bfbfbf;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    margin-right: 2px;
+}
+
+.carousel-indicators .active {
+    margin-right: 8px;
+    border: none;
+    background: #80807e;
+}

@@ -20,4 +20,4 @@
 /**
  * Module providing dialogs.
  */
-angular.module('dialog', [ 'ui.bootstrap' ]);
+angular.module('dialog', [ 'ui.bootstrap', 'ngAnimate' ]);
