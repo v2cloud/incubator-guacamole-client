@@ -20,7 +20,7 @@
 /**
  * A directive which displays a task bar.
  */
-angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
+angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document) {
     return {
         restrict: 'E',
         replace: true,
@@ -33,89 +33,121 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar() {
              *
              * @type V2cTaskBarButton[]
              */
-            localButtons : '=',
-            
+            localButtons: '=',
+
             /**
              * Whether the taskBar is shown or not.
              *
              * @type Boolean
              */
-            taskBarShown : '='
+            taskBarShown: '='
         },
         templateUrl: 'app/taskBar/templates/v2cTaskBar.html',
-        controller: ['$scope', 'v2cDialogService', function v2cTaskBarController($scope, v2cDialogService) {
+        controller: ['$scope', '$route', '$location', '$document', '$window',
+            'v2cDialogService', 'authenticationService', 'fullscreenService',
+            function v2cTaskBarController($scope,
+                                          $route,
+                                          $location,
+                                          $document,
+                                          $window,
+                                          v2cDialogService,
+                                          authenticationService,
+                                          fullscreenService) {
 
-            $scope.shown = $scope.taskBarShown;
-            
+                $scope.shown = $scope.taskBarShown;
+                
+                var document = $document[0];
 
-            /**
-             * Action which toggle the fullscreen mode.
-             */
-            var FULL_SCREEN_ACTION = {
-                name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_FULL_SCREEN',
-                className : 'task-bar-button-action full-screen-action',
-                callback: v2cDialogService.showHelpDialog(function(){})
-            };
-            
-            /**
-             * Action which reloads the page.
-             */
-            var RELOAD_PAGE_ACTION = {
-                name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_RELOAD_PAGE',
-                className : 'task-bar-button-action reload-page-action',
-                callback  : function(){}
-            };
-            
-            /**
-             * Action which displays the file transfer window.
-             */
-            var FILE_TRANSFER_ACTION = {
-                name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_FILE_TRANSFER',
-                className : 'task-bar-button-action file-transfer-action',
-                callback  : function(){}
-            };
-            
-            /**
-             * Action which displays the help window.
-             */
-            var HELP_ACTION = {
-                name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_HELP',
-                className : 'task-bar-button-action help-action',
-                callback  : function(){}
-            };
-            
-            /**
-             * Action which logs out the current user, redirecting them to back
-             * to the login screen after logout completes.
-             */
-            var LOGOUT_ACTION = {
-                name      : 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
-                className : 'task-bar-button-action logout-action',
-                callback  : function(){}
-            };
-            
-            /**
-             * V2Cloud Button which always appear in the task bar.
-             */
-            var V2_BUTTON = {
-                name      : 'V2CLOUD_TASK_BAR.V2_BUTTON',
-                className : 'task-bar-button',
-                actions   : [ 
-                    FULL_SCREEN_ACTION,
-                    RELOAD_PAGE_ACTION,
-                    FILE_TRANSFER_ACTION,
-                    HELP_ACTION,
-                    LOGOUT_ACTION
-                ]
-            };
-            
-            $scope.buttons = [ V2_BUTTON ];
-            
-            $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
-                $scope.shown = isTaskBarShown;
-            });
-            
-        }]
+                /**
+                 * Logs out the current user, redirecting them to back to the root
+                 * after logout completes.
+                 */
+                $scope.logout = function logout() {
+                    authenticationService.logout()['finally'](
+                        function logoutComplete() {
+                            if ($location.path() !== '/')
+                                $location.url('/');
+                            else
+                                $route.reload();
+                        });
+                };
+
+
+                /**
+                 * Action which toggle the fullscreen mode.
+                 */
+                var FULL_SCREEN_ACTION = {
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FULL_SCREEN',
+                    className: 'task-bar-button-action full-screen-action',
+                    callback: function () {
+                        if (fullscreenService.isEnabled())
+                            fullscreenService.cancel();
+                        else {
+                            var element = document.getElementById("client-view");
+                            fullscreenService.enable(element);
+                        }
+                    }
+                };
+
+                /**
+                 * Action which reloads the page.
+                 */
+                var RELOAD_PAGE_ACTION = {
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_RELOAD_PAGE',
+                    className: 'task-bar-button-action reload-page-action',
+                    callback: function () { $window.location.reload(); }
+                };
+
+                /**
+                 * Action which displays the file transfer window.
+                 */
+                var FILE_TRANSFER_ACTION = {
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FILE_TRANSFER',
+                    className: 'task-bar-button-action file-transfer-action',
+                    callback: v2cDialogService.showFileTransferDialog(function () {})
+                };
+
+                /**
+                 * Action which displays the help window.
+                 */
+                var HELP_ACTION = {
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_HELP',
+                    className: 'task-bar-button-action help-action',
+                    callback: v2cDialogService.showHelpDialog(function () {})
+                };
+
+                /**
+                 * Action which logs out the current user, redirecting them to back
+                 * to the login screen after logout completes.
+                 */
+                var LOGOUT_ACTION = {
+                        name: 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
+                        className: 'task-bar-button-action logout-action',
+                        callback: $scope.logout
+                    };
+
+                /**
+                 * V2Cloud Button which always appear in the task bar.
+                 */
+                var V2_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.V2_BUTTON',
+                    className: 'task-bar-button',
+                    actions: [
+                        FULL_SCREEN_ACTION,
+                        RELOAD_PAGE_ACTION,
+                        FILE_TRANSFER_ACTION,
+                        HELP_ACTION,
+                        LOGOUT_ACTION
+                    ]
+                };
+
+                $scope.buttons = [V2_BUTTON];
+
+                $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
+                    $scope.shown = isTaskBarShown;
+                });
+
+            }]
     }
 }]);
     

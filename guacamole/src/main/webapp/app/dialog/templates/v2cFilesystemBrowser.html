@@ -1,0 +1,15 @@
+<div class="filesystem-browser">
+    <div class="header breadcrumbs">
+        <div class="breadcrumb root"
+             ng-click="filesystem.callbacks.changeDirectory()"></div>
+        <div class="breadcrumb"
+             ng-repeat="file in filesystem.callbacks.getPath()"
+             ng-click="filesystem.callbacks.changeDirectory(file)">{{file.name}}
+        </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="menu-body">
+        <guac-file-browser client="filesystem.client" filesystem="filesystem.fs"></guac-file-browser>
+    </div>
+</div>

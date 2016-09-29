@@ -43,5 +43,24 @@ angular.module('dialog').factory('v2cDialogService', ['$uibModal', function v2cD
         }
     };
     
+    /**
+     * Show the file transfer dialog.
+     * @param {Function} closeCallback
+     *     The callback to call when the user close the dialog.
+     */
+    service.showFileTransferDialog = function showFileTransferDialog(closeCallback) {
+        return function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/dialog/templates/v2cFileTransferDialog.html',
+                size: 'lg',
+                controller: 'v2cFileTransferController',
+                windowClass: 'center-modal'
+            });
+            if (closeCallback) {
+                modalInstance.result.then(closeCallback());
+            }
+        }
+    };
+    
     return service;
 }]);
