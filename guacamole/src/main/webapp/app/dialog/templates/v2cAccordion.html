@@ -1,0 +1,14 @@
+<div>
+<uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel panel-default" ng-repeat="p in localPanels track by $index"
+         is-open="$first">
+        <uib-accordion-heading>
+            {{p.title}}
+            <i class="pull-right glyphicon"
+               ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </uib-accordion-heading>
+        <v2c-carousel ng-if="p.type === CAROUSSEL_TYPE" pages='p.pages'></v2c-carousel>
+        <div ng-if="p.type != TEXT_TYPE">{{p.content}}</div>
+    </div>
+</uib-accordion>
+</div>

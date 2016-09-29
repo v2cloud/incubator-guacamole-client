@@ -18,6 +18,22 @@
  */
 
 /**
- * Module providing dialogs.
+ * A directive which displays a v2 cloud Carousel
  */
-angular.module('dialog', [ 'ui.bootstrap', 'ngAnimate' ]);
+angular.module('dialog').directive('v2cCarousel', [function v2cCarousel() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            /**
+             * List of slide object to display in this carousel
+             */
+            pages: '='
+
+        },
+        templateUrl: 'app/dialog/templates/v2cCarousel.html',
+        controller: ['$scope', function v2cCarouselController($scope) {
+            $scope.active = 0;
+        }]
+    }
+}]);

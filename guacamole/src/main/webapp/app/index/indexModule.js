@@ -32,6 +32,7 @@ angular.module('index', [
     'navigation',
     'ngRoute',
     'ngTouch',
+    'ngAnimate',
     'notification',
     'pascalprecht.translate',
     'rest',

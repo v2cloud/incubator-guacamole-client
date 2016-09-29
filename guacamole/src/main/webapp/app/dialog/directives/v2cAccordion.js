@@ -18,6 +18,26 @@
  */
 
 /**
- * Module providing dialogs.
+ * A directive which displays a v2 cloud Accordion
  */
-angular.module('dialog', [ 'ui.bootstrap', 'ngAnimate' ]);
+angular.module('dialog').directive('v2cAccordion', [function v2cAccordion() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            /**
+             * List of panel object to display in this accordion
+             */
+            localPanels: '='
+        },
+        templateUrl: 'app/dialog/templates/v2cAccordion.html',
+        controller: ['$scope', function v2cAccordionController($scope) {
+            // We can use this controller to add logic to the accordion
+            
+            $scope.CAROUSSEL_TYPE = 'CAROUSEL';
+            $scope.TEXT_TYPE = 'TEXT';
+            
+            $scope.oneAtATime = true;
+        }]
+    }
+}]);
