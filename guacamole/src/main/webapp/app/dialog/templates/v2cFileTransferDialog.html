@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button" ng-click="close()">×</button>
+    <h4 class="modal-title" id="myModalLabel">
+        File Transfer
+    </h4>
+</div>
+<div class="modal-body">
+    <v2c-accordion local-items="drives"></v2c-accordion>
+
+    <div class="text-right">
+        <button class="upload-btn" guac-upload="uploadFiles">
+            {{'CLIENT.ACTION_UPLOAD_FILES' | translate}}
+        </button>
+    </div>
+</div>

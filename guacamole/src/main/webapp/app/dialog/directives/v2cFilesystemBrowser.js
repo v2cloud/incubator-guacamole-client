@@ -18,27 +18,21 @@
  */
 
 /**
- * A directive which displays a v2 cloud Accordion
+ * A directive which displays a v2 cloud filesystem browser
  */
-angular.module('dialog').directive('v2cAccordion', [function v2cAccordion() {
+angular.module('dialog').directive('v2cFilesystemBrowser', [function v2cFilesystemBrowser() {
     return {
         restrict: 'E',
         replace: true,
         scope: {
             /**
-             * List of items object to display in this accordion
+             * The filesystem to display.
              */
-            localItems: '='
+            filesystem: '='
         },
-        templateUrl: 'app/dialog/templates/v2cAccordion.html',
-        controller: ['$scope', function v2cAccordionController($scope) {
-            // We can use this controller to add logic to the accordion
-            
-            $scope.CAROUSSEL_TYPE = 'CAROUSEL';
-            $scope.TEXT_TYPE = 'TEXT';
-            $scope.FILE_SYSTEM_TYPE ='FILE_SYSTEM';
-            
-            $scope.oneAtATime = true;
+        templateUrl: 'app/dialog/templates/v2cFilesystemBrowser.html',
+        controller: ['$scope', function v2cFilesystemBrowserController($scope) {
+            // We can use this controller to add logic to the filesystem browser
         }]
     }
 }]);
