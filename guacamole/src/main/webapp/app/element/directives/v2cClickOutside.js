@@ -21,8 +21,8 @@
  * A directive which allows elements to be manually scrolled, and for their
  * scroll state to be observed.
  */
-angular.module('element').directive('v2cClickOutside', ['$document', '$parse', '$timeout', '$log',
-    function v2cClickOutside($document, $parse, $timeout, $log) {
+angular.module('element').directive('v2cClickOutside', ['$document', '$parse', '$timeout',
+    function v2cClickOutside($document, $parse, $timeout) {
 
     return {
         restrict: 'A',
@@ -84,7 +84,6 @@ angular.module('element').directive('v2cClickOutside', ['$document', '$parse', '
                             }
                         }
                     }
-                    $log.log("clickOutside");
                     // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
                     $timeout(function () {
                         fn = $parse(attr['v2cClickOutside']);

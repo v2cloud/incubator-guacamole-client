@@ -1,11 +1,11 @@
 <div>
 <uib-accordion close-others="oneAtATime">
     <div uib-accordion-group class="panel panel-default" ng-repeat="item in localItems track by $index"
-         is-open="$first">
-        <uib-accordion-heading>
+         is-open="open[$index]">
+        <uib-accordion-heading ng-click="open[$index]= !open[$index]">
             {{item.title | translate}}
             <i class="pull-right glyphicon"
-               ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+               ng-class="{'glyphicon-chevron-down': open[$index], 'glyphicon-chevron-right': !open[$index]}"></i>
         </uib-accordion-heading>
 
 

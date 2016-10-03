@@ -44,6 +44,13 @@ div.section {
     padding: 0;
 }
 
+img,
+a,
+button {
+    outline: none;
+}
+
+
 /*
  * List elements
  */
