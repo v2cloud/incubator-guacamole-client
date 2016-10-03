@@ -189,19 +189,9 @@ angular.module('client').directive('guacFileBrowser', [function guacFileBrowser(
 
                 // Mark file as focused upon click
                 element.on('click', function handleFileClick() {
-
-                    // Fire file-specific action if already focused
-                    if (element.hasClass('focused')) {
-                        fileAction();
-                        element.removeClass('focused');
-                    }
-
-                    // Otherwise mark as focused
-                    else {
-                        element.parent().children().removeClass('focused');
-                        element.addClass('focused');
-                    }
-
+                    element.parent().children().removeClass('focused');
+                    element.addClass('focused');
+                    fileAction();
                 });
 
                 // Prevent text selection during navigation
