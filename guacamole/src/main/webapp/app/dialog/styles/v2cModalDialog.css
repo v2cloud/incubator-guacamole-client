@@ -17,6 +17,13 @@
  * under the License.
  */
 
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
+
 .modal-open .modal {
     padding: 0;
 }

@@ -39,6 +39,11 @@ angular.module('dialog').directive('v2cAccordion', [function v2cAccordion() {
             $scope.FILE_SYSTEM_TYPE ='FILE_SYSTEM';
             
             $scope.oneAtATime = true;
+
+            $scope.open = {};
+            for (var i = 0; i < $scope.localItems.length; i++) {
+                $scope.open[i] = i == 0;
+            }
         }]
     }
 }]);

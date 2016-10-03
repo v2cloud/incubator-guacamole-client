@@ -21,8 +21,8 @@
  * Module providing dialogs.
  */
 angular.module('dialog', [ 
-    'ui.bootstrap', 
     'ngAnimate',
+    'ui.bootstrap',
     'element',
     'client'
 ]);

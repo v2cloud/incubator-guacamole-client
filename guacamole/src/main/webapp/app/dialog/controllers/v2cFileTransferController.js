@@ -21,8 +21,8 @@
  * The controller for the file transfer dialog.
  */
 angular.module('dialog').controller('v2cFileTransferController',
-    ['$scope', '$uibModalInstance', '$injector', '$routeParams', '$log',
-        function v2cFileTransferController($scope, $uibModalInstance, $injector, $routeParams, $log) {
+    ['$scope', '$uibModalInstance', '$injector', '$routeParams',
+        function v2cFileTransferController($scope, $uibModalInstance, $injector, $routeParams) {
 
             // Required types
             var ManagedFilesystem  = $injector.get('ManagedFilesystem');
@@ -68,9 +68,7 @@ angular.module('dialog').controller('v2cFileTransferController',
             var getPath = function getPath(file) {
                 var path = [];
                 // Add all files to path in ascending order of depth
-                $log.log('getPath.file: ' + file);
                 while (file && file.parent) {
-                    $log.log('While');
                     path.unshift(file);
                     file = file.parent;
                 }
@@ -80,7 +78,6 @@ angular.module('dialog').controller('v2cFileTransferController',
             $scope.drives = [];
             for (var i = 0; i < $scope.client.filesystems.length; i++) {
                 var fs = $scope.client.filesystems[i];
-                $log.log('fs.name: ' + fs.name);
                 var drive = {
                     title: fs.name,
                     type: 'FILE_SYSTEM',
@@ -91,7 +88,6 @@ angular.module('dialog').controller('v2cFileTransferController',
                             changeDirectory(fs, file || fs.root)
                         },
                         getPath: function () {
-                            $log.log('fs.currentDirectory: ' + fs.currentDirectory);
                             return getPath(fs.currentDirectory)
                         }
 
