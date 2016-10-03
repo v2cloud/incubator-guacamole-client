@@ -476,7 +476,16 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         $scope.page.title = name;
     });
 
-    /**
+
+     $scope.$on('v2cReconnectClient', function v2cReconnectClientListener(event){
+         RECONNECT_ACTION.callback()
+     });
+
+     $scope.$on('v2cToggleTextInput', function v2cReconnectClientListener(event){
+         $scope.showTextInput = !$scope.showTextInput;
+     });
+
+      /**
      * Displays a notification at the end of a Guacamole connection, whether
      * that connection is ending normally or due to an error. As the end of
      * a Guacamole connection may be due to changes in authentication status,

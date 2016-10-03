@@ -23,7 +23,7 @@
 /**
  * Provides the ManagedClient class used by the guacClientManager service.
  */
-angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
+angular.module('client').factory('ManagedClient', ['$rootScope', '$injector', 
     function defineManagedClient($rootScope, $injector) {
 
     // Required types
@@ -177,7 +177,8 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
         var pixel_density = $window.devicePixelRatio || 1;
         var optimal_dpi = pixel_density * 96;
         var optimal_width = $window.innerWidth * pixel_density;
-        var optimal_height = $window.innerHeight * pixel_density;
+        //TODO Loic 2016-09-30 We must not hardcode the height of the taskbar. it should be dynamic
+        var optimal_height = ($window.innerHeight - 40) * pixel_density;
 
         // Build base connect string
         var connectString =

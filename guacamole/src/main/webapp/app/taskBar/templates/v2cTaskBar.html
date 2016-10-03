@@ -1,4 +1,4 @@
-<div class="task-bar" ng-class="{show:shown}">
+<div class="task-bar" ng-class="{show:shown}" guac-touch-drag="taskBarDrag">
     <div class="task-bar-buttons" ng-repeat="button in buttons">
         <v2c-task-bar-button button="button">{{button.name}}</v2c-task-bar-button>
     </div>
