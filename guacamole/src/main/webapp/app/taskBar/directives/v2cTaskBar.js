@@ -159,9 +159,17 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
 
                 // Update menu or client based on dragging gestures
                 $scope.taskBarDrag = function clientDrag(inProgress, startX, startY, currentX, currentY, deltaX, deltaY) {
+                    
                     if (Math.abs(currentY - startY) < TASK_BAR_DRAG_VERTICAL_TOLERANCE
                         && currentX - startX >= TASK_BAR_DRAG_DELTA)
-                        $scope.$emit('v2cToggleTextInput');
+                        $scope.$emit('v2cShowTextInput', true);
+                    
+
+                    // Hide textInput if swipe gesture is detected
+                    if (Math.abs(currentY - startY) < TASK_BAR_DRAG_VERTICAL_TOLERANCE
+                        && startX - currentX >= TASK_BAR_DRAG_DELTA)
+                        $scope.$emit('v2cShowTextInput', false);
+                    
                     return false;
                 };
             }]

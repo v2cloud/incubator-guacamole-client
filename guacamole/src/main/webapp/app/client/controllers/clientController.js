@@ -481,8 +481,8 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          RECONNECT_ACTION.callback()
      });
 
-     $scope.$on('v2cToggleTextInput', function v2cReconnectClientListener(event){
-         $scope.showTextInput = !$scope.showTextInput;
+     $scope.$on('v2cShowTextInput', function v2cReconnectClientListener(event, showTextInput){
+         $scope.showTextInput = showTextInput;
      });
 
       /**
