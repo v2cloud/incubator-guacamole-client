@@ -46,6 +46,12 @@ angular.module('taskBar').directive('v2cTaskBarButton', [function v2cTaskBarButt
             $scope.toggleButtonMenu = function toggleButtonMenu() {
                 $scope.menuShown = !$scope.menuShown;
             };
+
+            $scope.hideButtonMenu = function hideButtonMenu() {
+                if ($scope.menuShown)
+                    $scope.menuShown = false;
+            };
+
         }]
     }
 }]);

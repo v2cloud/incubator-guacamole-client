@@ -3,7 +3,7 @@
     <div uib-accordion-group class="panel panel-default" ng-repeat="item in localItems track by $index"
          is-open="$first">
         <uib-accordion-heading>
-            {{item.title}}
+            {{item.title | translate}}
             <i class="pull-right glyphicon"
                ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </uib-accordion-heading>
@@ -11,7 +11,7 @@
 
         <v2c-carousel ng-if="item.type === CAROUSSEL_TYPE" pages='item.pages'></v2c-carousel>
 
-        <div ng-if="item.type === TEXT_TYPE">{{p.content}}</div>
+        <div ng-if="item.type === TEXT_TYPE"><span>{{item.content | translate}}</span></div>
 
         <v2c-filesystem-browser ng-if="item.type === FILE_SYSTEM_TYPE" class="filesystem-browser" filesystem="item">
         </v2c-filesystem-browser>

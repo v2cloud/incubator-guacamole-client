@@ -43,13 +43,14 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
             taskBarShown: '='
         },
         templateUrl: 'app/taskBar/templates/v2cTaskBar.html',
-        controller: ['$scope', '$route', '$location', '$document', '$window',
+        controller: ['$scope', '$route', '$location', '$document', '$window', '$timeout',
             'v2cDialogService', 'authenticationService', 'fullscreenService',
             function v2cTaskBarController($scope,
                                           $route,
                                           $location,
                                           $document,
                                           $window,
+                                          $timeout,
                                           v2cDialogService,
                                           authenticationService,
                                           fullscreenService) {
@@ -83,19 +84,24 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                         if (fullscreenService.isEnabled())
                             fullscreenService.cancel();
                         else {
-                            var element = document.getElementById("client-view");
+                            var element = document.getElementsByTagName("body")[0];
                             fullscreenService.enable(element);
                         }
+                        $timeout(function(){
+                            $scope.$emit('v2cReconnectClient')
+                        }, 300);
                     }
                 };
 
                 /**
-                 * Action which reloads the page.
+                 * Action which fit the viewport to screen.
                  */
-                var RELOAD_PAGE_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_RELOAD_PAGE',
-                    className: 'task-bar-button-action reload-page-action',
-                    callback: function () { $window.location.reload(); }
+                var FIT_SCREEN_ACTION = {
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FIT_SCREEN',
+                    className: 'task-bar-button-action fit-screen-action',
+                    callback: function () {
+                        $scope.$emit('v2cReconnectClient');
+                    }
                 };
 
                 /**
@@ -134,7 +140,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     className: 'task-bar-button',
                     actions: [
                         FULL_SCREEN_ACTION,
-                        RELOAD_PAGE_ACTION,
+                        FIT_SCREEN_ACTION,
                         FILE_TRANSFER_ACTION,
                         HELP_ACTION,
                         LOGOUT_ACTION
@@ -147,6 +153,17 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     $scope.shown = isTaskBarShown;
                 });
 
+
+                var TASK_BAR_DRAG_DELTA = 100;
+                var TASK_BAR_DRAG_VERTICAL_TOLERANCE = 10;
+
+                // Update menu or client based on dragging gestures
+                $scope.taskBarDrag = function clientDrag(inProgress, startX, startY, currentX, currentY, deltaX, deltaY) {
+                    if (Math.abs(currentY - startY) < TASK_BAR_DRAG_VERTICAL_TOLERANCE
+                        && currentX - startX >= TASK_BAR_DRAG_DELTA)
+                        $scope.$emit('v2cToggleTextInput');
+                    return false;
+                };
             }]
     }
 }]);

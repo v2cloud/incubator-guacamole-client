@@ -23,5 +23,7 @@
 angular.module('taskBar', [ 
     'dialog',
     'auth',
-    'fullscreen'
+    'fullscreen',
+    'touch',
+    'element'
 ]);

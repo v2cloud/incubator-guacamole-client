@@ -1,10 +1,11 @@
 <div class="task-bar-button-container">
-    <ul class="task-bar-button-menu" ng-class="{open: menuShown}">
+    <ul class="task-bar-button-menu" ng-class="{open: menuShown}" v2c-click-outside="hideButtonMenu()"
+        v2c-click-outside-ignore="v2-button">
         <li ng-repeat="action in button.actions">
             <a ng-class="action.className" ng-click="action.callback()">
                 <i><div class="action-image"></div></i>{{action.name | translate}}
             </a>
         </li>
     </ul>
-    <button ng-class="button.className" ng-click="toggleButtonMenu()" ></button>
+    <button ng-class="button.className" ng-click="toggleButtonMenu()" id="v2-button"></button>
 </div>

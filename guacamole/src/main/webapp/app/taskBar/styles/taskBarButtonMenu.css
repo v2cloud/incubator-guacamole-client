@@ -61,6 +61,8 @@
     font-size: 16px;
     display: block;
     padding: 8px 20px 8px 10px;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .task-bar-button-menu li a.task-bar-button-action:hover,
@@ -89,6 +91,10 @@
 
 .task-bar-button-menu li a.task-bar-button-action.full-screen-action i div {
     background-image: url("images/action-icons/v2c-fullscreen.png");
+}
+
+.task-bar-button-menu li a.task-bar-button-action.fit-screen-action i div {
+    background-image: url("images/action-icons/v2c-fit-screen.png");
 }
 
 .task-bar-button-menu li a.task-bar-button-action.reload-page-action i div {

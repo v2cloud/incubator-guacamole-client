@@ -25,6 +25,7 @@
         "ACTION_VIEW_HISTORY"       : "Historique",
         "ACTION_V2C_FULL_SCREEN"    : "Plein Écran",
         "ACTION_V2C_RELOAD_PAGE"    : "Rafraichir la page",
+        "ACTION_V2C_FIT_SCREEN"     : "Ajuster l'écran",
         "ACTION_V2C_FILE_TRANSFER"  : "Transfert de fichier",
         "ACTION_V2C_HELP"           : "Aide",
         "ACTION_V2C_LOGOUT"         : "Se deconnecter",
@@ -657,8 +658,18 @@
 
         "ACTION_V2C_FULL_SCREEN"    : "@:APP.ACTION_V2C_FULL_SCREEN",
         "ACTION_V2C_RELOAD_PAGE"    : "@:APP.ACTION_V2C_RELOAD_PAGE",
+        "ACTION_V2C_FIT_SCREEN"     : "@:APP.ACTION_V2C_FIT_SCREEN",
         "ACTION_V2C_FILE_TRANSFER"  : "@:APP.ACTION_V2C_FILE_TRANSFER",
         "ACTION_V2C_HELP"           : "@:APP.ACTION_V2C_HELP",
         "ACTION_V2C_LOGOUT"         : "@:APP.ACTION_V2C_LOGOUT"
+    },
+
+    "V2CLOUD_HELP_PANEL": {
+        "TITLE_PANEL_HOW_TO_DOWNLOAD_FILES"     : "Comment télécharger des fichiers",
+        "TITLE_PANEL_HOW_TO_UPLOAD_FILES"       : "Comment uploader des fichiers",
+        "TITLE_PANEL_HOW_TO_COPY_PASTE"         : "Comment copier/coller",
+        "TITLE_PANEL_HOW_TO_PRINT"              : "Comment imprimer",
+
+        "TEXT_HOW_TO_COPY_PASTE"                : "You can copy/paste text between V2 Cloud and your local PC normally."
     }
 }

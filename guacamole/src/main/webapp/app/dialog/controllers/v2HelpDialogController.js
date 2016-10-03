@@ -22,19 +22,9 @@
  */
 angular.module('dialog').controller('v2cHelpDialogController',
     ['$scope', '$uibModalInstance', function v2cHelpDialogController($scope, $uibModalInstance) {
-        
-               
-        var PANEL_1 = {
-            title: "1. How to open menu",
-            type: 'CAROUSEL',
-            pages:[
-                {image: 'images/help-dialog-images/click-on-v2-menu.jpg'},
-                {image: 'images/help-dialog-images/v2-menu-opened.jpg'}
-            ]
-        };
 
-        var PANEL_2 = {
-            title: "2. How to download files",
+        var PANEL_HOW_TO_DOWNLOAD_FILES = {
+            title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_DOWNLOAD_FILES",
             type: 'CAROUSEL',
             pages:[
                 {image: 'images/help-dialog-images/click-on-v2-menu.jpg'},
@@ -43,8 +33,8 @@ angular.module('dialog').controller('v2cHelpDialogController',
             ]
         };
 
-        var PANEL_3 = {
-            title: "3. How to upload files",
+        var PANEL_HOW_TO_UPLOAD_FILES = {
+            title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_UPLOAD_FILES",
             type: 'CAROUSEL',
             pages:[
                 {image: 'images/help-dialog-images/blank.jpg'},
@@ -53,15 +43,15 @@ angular.module('dialog').controller('v2cHelpDialogController',
             ]
         };
 
-        var PANEL_4 = {
-            title: "4. How to copy/paste",
+        var PANEL_HOW_TO_COPY_PASTE = {
+            title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_COPY_PASTE",
             type: 'TEXT',
             // The content can be html
-            content: "You can copy/paste text between V2 Cloud and your local PC normally."
+            content: "V2CLOUD_HELP_PANEL.TEXT_HOW_TO_COPY_PASTE"
         };
         
-        var PANEL_5 = {
-            title: "5. How to print",
+        var PANEL_HOW_TO_PRINT = {
+            title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_PRINT",
             type: 'CAROUSEL',
             pages: [
                 {image: 'images/help-dialog-images/blank.jpg'},
@@ -70,7 +60,12 @@ angular.module('dialog').controller('v2cHelpDialogController',
         };
 
 
-        $scope.helpPanels = [PANEL_1, PANEL_2, PANEL_3, PANEL_4 , PANEL_5];
+        $scope.helpPanels = [
+            PANEL_HOW_TO_DOWNLOAD_FILES,
+            PANEL_HOW_TO_UPLOAD_FILES,
+            PANEL_HOW_TO_COPY_PASTE,
+            PANEL_HOW_TO_PRINT
+        ];
                 
         $scope.close = function () {
             $uibModalInstance.close();
