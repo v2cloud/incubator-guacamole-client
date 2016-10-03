@@ -729,7 +729,7 @@
         "TITLE_PANEL_HOW_TO_COPY_PASTE"         : "How to copy/paste",
         "TITLE_PANEL_HOW_TO_PRINT"              : "How to print",
 
-        "TEXT_HOW_TO_COPY_PASTE"                : "You can copy/paste text between V2 Cloud and your local PC normally."
+        "TEXT_HOW_TO_COPY_PASTE"                : "Please install the Chrome extension available at https://chrome-ext.v2cloud.com to enable bidirectional clipboard."
     }
 
 }
