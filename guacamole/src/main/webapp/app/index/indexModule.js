@@ -35,5 +35,6 @@ angular.module('index', [
     'pascalprecht.translate',
     'rest',
     'settings',
-    'templates-main'
+    'templates-main',
+    'ngSanitize'
 ]);
