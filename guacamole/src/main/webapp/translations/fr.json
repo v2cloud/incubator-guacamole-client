@@ -670,6 +670,6 @@
         "TITLE_PANEL_HOW_TO_COPY_PASTE"         : "Comment copier/coller",
         "TITLE_PANEL_HOW_TO_PRINT"              : "Comment imprimer",
 
-        "TEXT_HOW_TO_COPY_PASTE"                : "Veuillez installer l'extention Chrome disponible à https://chrome-ext.v2cloud.com pour être en mesure d'avoir le presse-papier bidirectionnel."
+        "TEXT_HOW_TO_COPY_PASTE"                : "Veuillez installer l'extention Chrome disponible à <a href=\"https://chrome-ext.v2cloud.com\" target=\"blank\">ici</a> pour être en mesure d'avoir le presse-papier bidirectionnel."
     }
 }

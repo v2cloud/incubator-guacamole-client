@@ -31,7 +31,7 @@
 
 .file-browser .list-item.focused .caption {
     border: 1px dotted rgba(0, 0, 0, 0.5);
-    background: rgba(204, 221, 170, 0.5);
+    background: rgba(221, 221, 221, 0.5);
 }
 
 /* Directory / file icons */

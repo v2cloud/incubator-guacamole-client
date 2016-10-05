@@ -129,7 +129,7 @@ button {
 }
 
 .list-item:not(.selected) .caption:hover {
-    background: #CDA;
+    background: #999;
 }
 
 .choice .list-item {
