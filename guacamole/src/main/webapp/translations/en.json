@@ -28,7 +28,7 @@
         "ACTION_VIEW_HISTORY"       : "History",
         "ACTION_V2C_FULL_SCREEN"    : "Full Screen",
         "ACTION_V2C_RELOAD_PAGE"    : "Reload Page",
-        "ACTION_V2C_FIT_SCREEN"     : "Fit screen",
+        "ACTION_V2C_FIT_SCREEN"     : "Fit Screen",
         "ACTION_V2C_FILE_TRANSFER"  : "File Transfer",
         "ACTION_V2C_HELP"           : "Help",
         "ACTION_V2C_LOGOUT"         : "Logout",
@@ -664,7 +664,7 @@
         "TITLE_PANEL_HOW_TO_COPY_PASTE"         : "How to copy/paste",
         "TITLE_PANEL_HOW_TO_PRINT"              : "How to print",
 
-        "TEXT_HOW_TO_COPY_PASTE"                : "Please install the Chrome extension available at https://chrome-ext.v2cloud.com to enable bidirectional clipboard."
+        "TEXT_HOW_TO_COPY_PASTE"                : "Please install the Chrome extension available <a href=\"https://chrome-ext.v2cloud.com\" target=\"blank\">here</a> to enable bidirectional clipboard."
     }
 
 }

@@ -178,7 +178,7 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
         var optimal_dpi = pixel_density * 96;
         var optimal_width = $window.innerWidth * pixel_density;
         //TODO Loic 2016-09-30 We must not hardcode the height of the taskbar. it should be dynamic
-        var optimal_height = ($window.innerHeight - 40) * pixel_density;
+        var optimal_height = ($window.innerHeight - 25) * pixel_density;
 
         // Build base connect string
         var connectString =
