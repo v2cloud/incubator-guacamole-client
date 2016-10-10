@@ -307,24 +307,8 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     // Update menu or client based on dragging gestures
     $scope.clientDrag = function clientDrag(inProgress, startX, startY, currentX, currentY, deltaX, deltaY) {
-
-        // Show menu if the user swipes from the left
-        if (startX <= MENU_DRAG_MARGIN) {
-
-            if (Math.abs(currentY - startY) <  MENU_DRAG_VERTICAL_TOLERANCE
-                      && currentX - startX  >= MENU_DRAG_DELTA)
-                $scope.menu.shown = true;
-
-        }
-
-        // Scroll display if absolute mouse is in use
-        else if ($scope.client.clientProperties.emulateAbsoluteMouse) {
-            $scope.client.clientProperties.scrollLeft -= deltaX;
-            $scope.client.clientProperties.scrollTop -= deltaY;
-        }
-
+        // Do nothing, we do not want to open the side menu
         return false;
-
     };
 
     /**
