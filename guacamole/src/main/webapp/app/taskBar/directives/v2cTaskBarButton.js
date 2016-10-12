@@ -35,7 +35,22 @@ angular.module('taskBar').directive('v2cTaskBarButton', [function v2cTaskBarButt
         },
     
         templateUrl: 'app/taskBar/templates/v2cTaskBarButton.html',
-        controller: ['$scope', function v2cTaskBarController($scope) {
+        controller: ['$scope', '$log',function v2cTaskBarController($scope, $log) {
+
+
+            /**
+             * @description Private function to attempt to figure out if we are on a touch device
+             * @private
+             **/
+            function _hasTouch() {
+                // works on most browsers, IE10/11 and Surface
+                return 'ontouchstart' in window || navigator.maxTouchPoints;
+            }
+            
+            $scope.showButton = true;
+            if ('mobileOnly' in $scope.button && $scope.button.mobileOnly)
+                $scope.showButton = _hasTouch();
+            
             /**
              * Whether the contents of the menu are currently shown.
              *
@@ -43,8 +58,15 @@ angular.module('taskBar').directive('v2cTaskBarButton', [function v2cTaskBarButt
              */
             $scope.menuShown = false;
 
-            $scope.toggleButtonMenu = function toggleButtonMenu() {
-                $scope.menuShown = !$scope.menuShown;
+            $scope.buttonClicked = function buttonClicked() {
+                if ('callback' in $scope.button &&
+                    typeof $scope.button.callback === 'function') {
+                    $scope.button.callback()
+                }
+                else if ('actions' in $scope.button &&
+                          $scope.button.actions.length > 0){
+                    $scope.menuShown = !$scope.menuShown;
+                }
             };
 
             $scope.hideButtonMenu = function hideButtonMenu() {

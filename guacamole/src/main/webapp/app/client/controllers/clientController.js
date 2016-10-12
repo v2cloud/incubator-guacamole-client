@@ -236,7 +236,6 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     */
     $scope.taskBarShown = true;
 
-
     // Convenience method for closing the menu
     $scope.closeMenu = function closeMenu() {
         $scope.menu.shown = false;
@@ -307,7 +306,10 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     // Update menu or client based on dragging gestures
     $scope.clientDrag = function clientDrag(inProgress, startX, startY, currentX, currentY, deltaX, deltaY) {
-        // Do nothing, we do not want to open the side menu
+        if ($scope.client.clientProperties.emulateAbsoluteMouse) {
+            $scope.client.clientProperties.scrollLeft -= deltaX;
+            $scope.client.clientProperties.scrollTop -= deltaY;
+        }
         return false;
     };
 
@@ -469,10 +471,11 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          RECONNECT_ACTION.callback()
      });
 
-     $scope.$on('v2cShowTextInput', function v2cReconnectClientListener(event, showTextInput){
-         $scope.showTextInput = showTextInput;
+     $scope.$on('v2cToggleTextInput', function v2cToggleTextInputListener(event){
+         $scope.showTextInput = !$scope.showTextInput;
      });
 
+            
       /**
      * Displays a notification at the end of a Guacamole connection, whether
      * that connection is ending normally or due to an error. As the end of

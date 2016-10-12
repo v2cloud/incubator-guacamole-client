@@ -336,12 +336,14 @@ angular.module('textInput').directive('guacTextInput', [function guacTextInput()
 
             // Attempt to change focus depending on need
             $scope.$watch('needsFocus', function focusDesireChanged(focusNeeded) {
-
                 if (focusNeeded)
-                    target.focus();
+                    $timeout(function () {
+                        target.focus();
+                    }, 500);
                 else
-                    target.blur();
-
+                    $timeout(function () {
+                        target.blur();
+                    }, 500);
             });
 
             // If the text input UI has focus, prevent keydown events

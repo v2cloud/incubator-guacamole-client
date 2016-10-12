@@ -101,7 +101,7 @@
         "HELP_CLIPBOARD"           : "Texte copié/coupé dans V2 Cloud apparaîtra ici. Changer le texte ci dessous affectera le presse-papiers distant.",
         "HELP_INPUT_METHOD_NONE"   : "Aucune méthode de saisie utilisée. Clavier accepté depuis un clavier physique connecté.",
         "HELP_INPUT_METHOD_OSK"    : "Affiche et utilise la saisie du clavier virtuel intégré dans V2 Cloud. Le clavier virtuel permet d'utiliser des combinaisons de touches autrement impossibles (comme Ctrl-Alt-Supp).",
-        "HELP_INPUT_METHOD_TEXT"   : "Affiche et utilise la saisie du clavier virtuel intégré dans V2 Cloud. Ceci est nécessaire pou les périphériques mobiles ne disposant pas de clavier physique.",
+        "HELP_INPUT_METHOD_TEXT"   : "Affiche et utilise la saisie du clavier virtuel intégré dans V2 Cloud. Ceci est nécessaire pour les périphériques mobiles ne disposant pas de clavier physique.",
         "HELP_MOUSE_MODE"          : "Détermine comment la souris distante se comporte selon les événements.", 
         "HELP_MOUSE_MODE_ABSOLUTE" : "Appuyer pour cliquer. Le clique s'effectue à l'endroit de l'appui.",
         "HELP_MOUSE_MODE_RELATIVE" : "Glisser pour déplacer le pointeur de la souris et appuyer opur cliquer. Le clique s'effectue à l'endroit du pointeur.", 

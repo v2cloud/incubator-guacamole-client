@@ -56,7 +56,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                                           fullscreenService) {
 
                 $scope.shown = $scope.taskBarShown;
-                
+
                 var document = $document[0];
 
                 /**
@@ -87,7 +87,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                             var element = document.getElementsByTagName("body")[0];
                             fullscreenService.enable(element);
                         }
-                        $timeout(function(){
+                        $timeout(function () {
                             $scope.$emit('v2cReconnectClient')
                         }, 300);
                     }
@@ -110,7 +110,8 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 var FILE_TRANSFER_ACTION = {
                     name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FILE_TRANSFER',
                     className: 'task-bar-button-action file-transfer-action',
-                    callback: v2cDialogService.showFileTransferDialog(function () {})
+                    callback: v2cDialogService.showFileTransferDialog(function () {
+                    })
                 };
 
                 /**
@@ -119,7 +120,8 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 var HELP_ACTION = {
                     name: 'V2CLOUD_TASK_BAR.ACTION_V2C_HELP',
                     className: 'task-bar-button-action help-action',
-                    callback: v2cDialogService.showHelpDialog(function () {})
+                    callback: v2cDialogService.showHelpDialog(function () {
+                    })
                 };
 
                 /**
@@ -127,17 +129,17 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                  * to the login screen after logout completes.
                  */
                 var LOGOUT_ACTION = {
-                        name: 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
-                        className: 'task-bar-button-action logout-action',
-                        callback: $scope.logout
-                    };
+                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
+                    className: 'task-bar-button-action logout-action',
+                    callback: $scope.logout
+                };
 
                 /**
                  * V2Cloud Button which always appear in the task bar.
                  */
                 var V2_BUTTON = {
                     name: 'V2CLOUD_TASK_BAR.V2_BUTTON',
-                    className: 'task-bar-button',
+                    className: 'task-bar-button-v2',
                     actions: [
                         FULL_SCREEN_ACTION,
                         FIT_SCREEN_ACTION,
@@ -147,31 +149,24 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     ]
                 };
 
-                $scope.buttons = [V2_BUTTON];
+                /**
+                 * Button Which toggle the text input bar.
+                 */
+                var TOGGLE_TEXT_INPUT_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.V2_BUTTON',
+                    className: 'task-bar-button-keyboard fa fa-keyboard-o',
+                    mobileOnly: true,
+                    callback: function () {
+                        $scope.$emit('v2cToggleTextInput');
+                    }
+                };
+
+                $scope.buttons = [V2_BUTTON, TOGGLE_TEXT_INPUT_BUTTON];
 
                 $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
                     $scope.shown = isTaskBarShown;
                 });
 
-
-                var TASK_BAR_DRAG_DELTA = 100;
-                var TASK_BAR_DRAG_VERTICAL_TOLERANCE = 10;
-
-                // Update menu or client based on dragging gestures
-                $scope.taskBarDrag = function clientDrag(inProgress, startX, startY, currentX, currentY, deltaX, deltaY) {
-                    
-                    if (Math.abs(currentY - startY) < TASK_BAR_DRAG_VERTICAL_TOLERANCE
-                        && currentX - startX >= TASK_BAR_DRAG_DELTA)
-                        $scope.$emit('v2cShowTextInput', true);
-                    
-
-                    // Hide textInput if swipe gesture is detected
-                    if (Math.abs(currentY - startY) < TASK_BAR_DRAG_VERTICAL_TOLERANCE
-                        && startX - currentX >= TASK_BAR_DRAG_DELTA)
-                        $scope.$emit('v2cShowTextInput', false);
-                    
-                    return false;
-                };
             }]
     }
 }]);
