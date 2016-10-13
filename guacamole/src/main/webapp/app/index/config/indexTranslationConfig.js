@@ -33,7 +33,7 @@ angular.module('index').config(['$injector', function($injector) {
     $translateProvider.preferredLanguage(preferenceServiceProvider.preferences.language);
 
     // Escape any HTML in translation strings
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
     // Load translations via translationLoader service
     $translateProvider.useLoader('translationLoader');
