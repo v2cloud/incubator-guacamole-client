@@ -243,6 +243,10 @@ angular.module('client').directive('guacFileBrowser', [function guacFileBrowser(
 
             };
 
+            // Refresh filesystem, if it exists
+            if ($scope.filesystem)
+                ManagedFilesystem.refresh($scope.filesystem, $scope.filesystem.currentDirectory);
+            
             // Watch directory contents once file template is available
             $templateRequest('app/client/templates/file.html').then(function fileTemplateRetrieved(html) {
 
