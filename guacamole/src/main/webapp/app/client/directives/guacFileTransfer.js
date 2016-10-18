@@ -201,6 +201,14 @@ angular.module('client').directive('guacFileTransfer', [function guacFileTransfe
             };
 
             /**
+             * Automatically save the file when the it become savable.
+             */
+            $scope.$watch($scope.isSavable, function (isSavable) {
+                if (isSavable)
+                    $scope.save();
+            });
+
+            /**
              * Returns whether an error has occurred. If an error has occurred,
              * the transfer is no longer active, and the text of the error can
              * be read from getErrorText().
