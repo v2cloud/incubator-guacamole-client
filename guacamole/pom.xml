@@ -232,6 +232,8 @@
                 <configuration>
                     <excludes>
                         <exclude>src/main/webapp/app/*/templates/*.html</exclude>
+                        <exclude>src/main/webapp/lib/**/*</exclude>
+                        <exclude>src/main/webapp/fonts/**/*</exclude>
                         <exclude>**/*.json</exclude>
                         <exclude>src/licenses/**/*</exclude>
                     </excludes>
