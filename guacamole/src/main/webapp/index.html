@@ -33,7 +33,7 @@
     <body ng-class="page.bodyClassName">
 
         <!-- Content for logged-in users -->
-        <div ng-if="!expectedCredentials">
+        <div ng-if="!showLogin">
         
             <!-- Global status/error dialog -->
             <div ng-class="{shown: guacNotification.getStatus()}" class="status-outer">
@@ -48,7 +48,7 @@
         </div>
 
         <!-- Login screen for logged-out users -->
-        <guac-login ng-show="expectedCredentials"
+        <guac-login ng-show="showLogin"
                     help-text="loginHelpText"
                     form="expectedCredentials"
                     values="acceptedCredentials"></guac-login>

@@ -85,11 +85,14 @@ angular.module('navigation').directive('guacUserMenu', [function guacUserMenu() 
              * after logout completes.
              */
             $scope.logout = function logout() {
-                authenticationService.logout()['finally'](function logoutComplete() {
+                authenticationService.logout();
+                ['finally'](function logoutComplete() {
                     if ($location.path() !== '/')
-                        $location.url('/');
+                        $location.url('/?' + jQuery.param($location.search()));
                     else
                         $route.reload();
+                
+                   
                 });
             };
 

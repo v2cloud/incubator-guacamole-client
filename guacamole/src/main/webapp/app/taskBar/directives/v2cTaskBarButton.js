@@ -35,7 +35,7 @@ angular.module('taskBar').directive('v2cTaskBarButton', [function v2cTaskBarButt
         },
     
         templateUrl: 'app/taskBar/templates/v2cTaskBarButton.html',
-        controller: ['$scope', '$log',function v2cTaskBarController($scope, $log) {
+        controller: ['$scope', function v2cTaskBarController($scope) {
 
 
             /**

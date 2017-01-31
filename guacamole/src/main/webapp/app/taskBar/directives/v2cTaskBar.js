@@ -64,13 +64,9 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                  * after logout completes.
                  */
                 $scope.logout = function logout() {
-                    authenticationService.logout()['finally'](
-                        function logoutComplete() {
-                            if ($location.path() !== '/')
-                                $location.url('/');
-                            else
-                                $route.reload();
-                        });
+                    authenticationService.logout()['finally'](function logoutComplete() {
+                        $location.url('/?' + jQuery.param($location.search()));
+                    });
                 };
 
 

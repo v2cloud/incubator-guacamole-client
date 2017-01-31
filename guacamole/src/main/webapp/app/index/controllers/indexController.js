@@ -28,6 +28,8 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
     var $window          = $injector.get('$window');
     var clipboardService = $injector.get('clipboardService');
     var guacNotification = $injector.get('guacNotification');
+    var $location        = $injector.get('$location');
+    var $timeout         = $injector.get('$timeout');
     
     /**
      * The notification service.
@@ -60,6 +62,7 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
      * @type Field[]
      */
     $scope.expectedCredentials = null;
+    $scope.showLogin = false;
 
     /**
      * Basic page-level information.
@@ -170,6 +173,7 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
         $scope.loginHelpText = null;
         $scope.acceptedCredentials = null;
         $scope.expectedCredentials = null;
+        $scope.showLogin = false;
     });
 
     // Update title and CSS class upon navigation
@@ -185,6 +189,20 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
 
             // Set body CSS class
             $scope.page.bodyClassName = current.$$route.bodyClassName || '';
+        }
+    });
+
+    $scope.$watch('expectedCredentials', function expectedCredentialsChanged(expectedCredentials) {
+        if (!!expectedCredentials) {
+            if ($location.search().hasOwnProperty('logoutPage')) {
+                $window.location.href = $location.search()['logoutPage'];
+            } else {
+                $scope.showLogin = true;
+                if ($location.path() !== '/')
+                    $location.url('/');
+            }
+        } else{
+            $scope.showLogin = false;
         }
     });
 

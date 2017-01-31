@@ -151,7 +151,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         className : "logout button",
         callback  : function logoutCallback() {
             authenticationService.logout()['finally'](function logoutComplete() {
-                $location.url('/');
+                $location.url('/?' + jQuery.param($location.search()));
             });
         }
     };
