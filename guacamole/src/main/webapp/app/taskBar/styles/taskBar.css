@@ -75,3 +75,11 @@
 .task-bar-buttons{
   display: inline-block;
 }
+
+.poweredby-v2 {
+    color: white;
+    font-weight: lighter;
+    font-size: small;
+    line-height: 30px;
+    margin-right: 20px;
+}
