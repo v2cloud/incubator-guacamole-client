@@ -174,7 +174,6 @@
 
                             <cssSourceFiles>
                                 <cssSourceFile>license.txt</cssSourceFile>
-                                <cssSourceFile>lib/bootstrap/bootstrap.css</cssSourceFile>
                             </cssSourceFiles>
                             
                             <cssSourceIncludes>
@@ -395,7 +394,6 @@
             <version>2.8.0</version>
             <scope>runtime</scope>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/org.webjars/angular-ui-bootstrap -->
         <dependency>

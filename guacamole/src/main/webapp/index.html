@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html ng-app="index" ng-controller="indexController">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi"/>
@@ -26,11 +26,14 @@
         <link rel="icon" type="image/png" href="images/logo-64.png"/>
         <link rel="icon" type="image/png" sizes="144x144" href="images/logo-144.png"/>
         <link rel="apple-touch-icon" type="image/png" href="images/logo-144.png"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="app.css?v=${project.version}">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
         <title>V2 Web Connect</title>
     </head>
-    <body ng-class="page.bodyClassName">
+    <body ng-app="index" ng-controller="indexController" ng-class="page.bodyClassName">
 
         <!-- Content for logged-in users -->
         <div ng-if="!showLogin">
