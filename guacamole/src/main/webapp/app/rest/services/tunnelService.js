@@ -197,6 +197,7 @@ angular.module('rest').factory('tunnelService', ['$injector',
                 + '/' + encodeURIComponent(sanitizeFilename(filename))
                 + '?token=' + encodeURIComponent(authenticationService.getCurrentToken());
 
+
         // Create temporary hidden iframe to facilitate download
         var iframe = document.createElement('iframe');
         iframe.style.position = 'fixed';
