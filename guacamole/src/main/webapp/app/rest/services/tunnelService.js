@@ -188,7 +188,12 @@ angular.module('rest').factory('tunnelService', ['$injector',
      *     The filename that should be given to the downloaded file.
      */
     service.downloadStream = function downloadStream(tunnel, stream, mimetype, filename) {
-
+        // Do not download the temporary Identifier file
+        var extension = filename.split('.').pop();
+        if (extension === 'Identifier') {
+            return;
+        }
+        
         // Build download URL
         var url = $window.location.origin
                 + $window.location.pathname
@@ -196,8 +201,8 @@ angular.module('rest').factory('tunnelService', ['$injector',
                 + '/streams/' + encodeURIComponent(stream.index)
                 + '/' + encodeURIComponent(sanitizeFilename(filename))
                 + '?token=' + encodeURIComponent(authenticationService.getCurrentToken());
-
-
+        
+        
         // Create temporary hidden iframe to facilitate download
         var iframe = document.createElement('iframe');
         iframe.style.position = 'fixed';
