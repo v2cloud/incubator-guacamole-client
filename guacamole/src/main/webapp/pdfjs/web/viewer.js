@@ -16,8 +16,7 @@
 
 'use strict';
 
-//var DEFAULT_URL = 'https://crossorigin.me/http://www.orimi.com/pdf-test.pdf';
-var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
+var DEFAULT_URL = '';
 
   var pdfjsWebLibs = {
     pdfjsWebPDFJS: window.pdfjsDistBuildPdf
@@ -8728,6 +8727,7 @@ function webViewerInitialized() {
   var queryString = document.location.search.substring(1);
   var params = parseQueryString(queryString);
   var file = 'file' in params ? params.file : DEFAULT_URL;
+  var auto_print = 'print' in params ;
   validateFileURL(file);
 
   var waitForBeforeOpening = [];
@@ -8896,12 +8896,41 @@ function webViewerInitialized() {
 
   Promise.all(waitForBeforeOpening).then(function () {
     webViewerOpenFileViaURL(file);
+    if(auto_print) {
+      printWhenReady();
+    }
   }).catch(function (reason) {
     PDFViewerApplication.error(mozL10n.get('loading_error', null,
       'An error occurred while opening.'), reason);
   });
 }
 
+function printWhenReady() {
+  try {
+    var notReady = false;
+    var i, ii;
+    if (!PDFViewerApplication.pdfDocument || !PDFViewerApplication.pagesCount || !PDFViewerApplication.initialized) {
+      notReady = true;
+    } else {
+      for (i = 0, ii = PDFViewerApplication.pagesCount; i < ii; ++i) {
+        if (!PDFViewerApplication.pdfViewer.getPageView(i).pdfPage) {
+          notReady = true;
+          break;
+        }
+      }
+    }
+
+    if (!notReady) {
+      PDFViewerApplication.appConfig.toolbar.print.click();
+    }
+    else {
+      window.setTimeout(printWhenReady, 1000);
+    }
+  } catch (ex) {
+    window.setTimeout(printWhenReady, 1000);
+  }
+}
+  
 function webViewerOpenFileViaURL(file) {
   if (file && file.lastIndexOf('file:', 0) === 0) {
     // file:-scheme. Load the contents in the main thread because QtWebKit
