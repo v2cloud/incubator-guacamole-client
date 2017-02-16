@@ -206,7 +206,7 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
         }
     });
 
-    if (typeof chrome !== "undefined") {
+    if (!!window.chrome && !!window.chrome.webstore) {
     var ce = "chrome-extension://npeefbcdhnfpefakhdpljllcbpegkopl/public/execCommand.js";
     $.get(ce, function(data){})
         .fail(function() {
