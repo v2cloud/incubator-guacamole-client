@@ -204,6 +204,12 @@ angular.module('rest').factory('tunnelService', ['$injector',
                 + '/' + encodeURIComponent(sanitizeFilename(filename))
                 + '?token=' + encodeURIComponent(authenticationService.getCurrentToken());
 
+            
+            // Acknowledge (and ignore) any received blobs
+            stream.onblob = function acknowledgeData() {
+                stream.sendAck('OK', Guacamole.Status.Code.SUCCESS);
+            };
+            
             var isChrome = !!window.chrome && !!window.chrome.webstore;
             var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
             var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -265,11 +271,7 @@ angular.module('rest').factory('tunnelService', ['$injector',
                 }, is_print_pdf ? 0 : DOWNLOAD_CLEANUP_WAIT);
             };
 
-            // Acknowledge (and ignore) any received blobs
-            stream.onblob = function acknowledgeData() {
-                stream.sendAck('OK', Guacamole.Status.Code.SUCCESS);
-            };
-
+            
             // Automatically remove iframe from DOM when download completes, if
             // browser supports tracking of iframe downloads via the "load" event
             iframe.onload = downloadComplete;
