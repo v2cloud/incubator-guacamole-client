@@ -65,7 +65,11 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                  */
                 $scope.logout = function logout() {
                     authenticationService.logout()['finally'](function logoutComplete() {
-                        $location.url('/?' + jQuery.param($location.search()));
+                        var parameter = $location.search();
+                        if (parameter.hasOwnProperty('logoutPage')) {
+                            parameter['logoutPage'] += '/logout/';
+                        }
+                        $location.url('/?' + jQuery.param(parameter));
                     });
                 };
 
