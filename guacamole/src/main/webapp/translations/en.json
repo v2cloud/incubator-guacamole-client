@@ -26,12 +26,13 @@
         "ACTION_SHARE"              : "Share",
         "ACTION_UPDATE_PASSWORD"    : "Update Password",
         "ACTION_VIEW_HISTORY"       : "History",
-        "ACTION_V2C_FULL_SCREEN"    : "Full Screen",
+        "BUTTON_V2C_FULL_SCREEN"    : "Full Screen",
         "ACTION_V2C_RELOAD_PAGE"    : "Reload Page",
-        "ACTION_V2C_FIT_SCREEN"     : "Fit Screen",
-        "ACTION_V2C_FILE_TRANSFER"  : "File Transfer",
-        "ACTION_V2C_HELP"           : "Help",
-        "ACTION_V2C_LOGOUT"         : "Logout",
+        "BUTTON_V2C_FIT_SCREEN"     : "Fit Screen",
+        "BUTTON_V2C_FILE_TRANSFER"  : "File Transfer",
+        "BUTTON_V2C_HELP"           : "Help",
+        "BUTTON_V2C_LOGOUT"         : "Logout",
+        "BUTTON_V2C_INPUT"          : "Keyboard",
 
         "DIALOG_HEADER_ERROR" : "Error",
 
@@ -715,12 +716,13 @@
 
         "V2_BUTTON"   : "V2",
 
-        "ACTION_V2C_FULL_SCREEN"    : "@:APP.ACTION_V2C_FULL_SCREEN",
+        "BUTTON_V2C_FULL_SCREEN"    : "@:APP.BUTTON_V2C_FULL_SCREEN",
         "ACTION_V2C_RELOAD_PAGE"    : "@:APP.ACTION_V2C_RELOAD_PAGE",
-        "ACTION_V2C_FIT_SCREEN"     : "@:APP.ACTION_V2C_FIT_SCREEN",
-        "ACTION_V2C_FILE_TRANSFER"  : "@:APP.ACTION_V2C_FILE_TRANSFER",
-        "ACTION_V2C_HELP"           : "@:APP.ACTION_V2C_HELP",
-        "ACTION_V2C_LOGOUT"         : "@:APP.ACTION_V2C_LOGOUT"
+        "BUTTON_V2C_FIT_SCREEN"     : "@:APP.BUTTON_V2C_FIT_SCREEN",
+        "BUTTON_V2C_FILE_TRANSFER"  : "@:APP.BUTTON_V2C_FILE_TRANSFER",
+        "BUTTON_V2C_HELP"           : "@:APP.BUTTON_V2C_HELP",
+        "BUTTON_V2C_LOGOUT"         : "@:APP.BUTTON_V2C_LOGOUT",
+        "BUTTON_V2C_INPUT"          : "@:APP.BUTTON_V2C_INPUT"
     },
 
     "V2CLOUD_HELP_PANEL" : {

@@ -8,5 +8,7 @@
         </li>
     </ul>
     <button class="task-bar-button" ng-class="button.className" ng-click="buttonClicked()" id="taskbarbutton">
+        <i class="btn-icon" ng-class="button.iconClassName"></i>
+        <div class="btn-name">{{button.name | translate}}</div>
     </button>
 </div>

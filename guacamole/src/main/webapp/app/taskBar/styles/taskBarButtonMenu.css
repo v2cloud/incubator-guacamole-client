@@ -88,26 +88,9 @@
     display: inline-block;
 }
 
+/*
 .task-bar-button-menu li a.task-bar-button-action.full-screen-action i div {
     background-image: url("images/action-icons/v2c-fullscreen.png");
 }
+*/
 
-.task-bar-button-menu li a.task-bar-button-action.fit-screen-action i div {
-    background-image: url("images/action-icons/v2c-fit-screen.png");
-}
-
-.task-bar-button-menu li a.task-bar-button-action.reload-page-action i div {
-    background-image: url("images/action-icons/v2c-reload-page.png");
-}
-
-.task-bar-button-menu li a.task-bar-button-action.file-transfer-action i div{
-    background-image: url("images/action-icons/v2c-file-transfer.png");
-}
-
-.task-bar-button-menu li a.task-bar-button-action.help-action i div {
-    background-image: url("images/action-icons/v2c-help.png");
-}
-
-.task-bar-button-menu li a.task-bar-button-action.logout-action  i div{
-    background-image: url("images/action-icons/v2c-logout.png");
-}

@@ -77,9 +77,10 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 /**
                  * Action which toggle the fullscreen mode.
                  */
-                var FULL_SCREEN_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FULL_SCREEN',
-                    className: 'task-bar-button-action full-screen-action',
+                var FULL_SCREEN_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_FULL_SCREEN',
+                    className: 'task-bar-button-full-screen',
+                    iconClassName: 'fa fa-arrows-alt',
                     callback: function () {
                         if (fullscreenService.isEnabled())
                             fullscreenService.cancel();
@@ -96,9 +97,9 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 /**
                  * Action which fit the viewport to screen.
                  */
-                var FIT_SCREEN_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FIT_SCREEN',
-                    className: 'task-bar-button-action fit-screen-action',
+                var FIT_SCREEN_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_FIT_SCREEN',
+                    className: 'task-bar-button-fit-screen',
                     callback: function () {
                         $scope.$emit('v2cReconnectClient');
                     }
@@ -107,9 +108,10 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 /**
                  * Action which displays the file transfer window.
                  */
-                var FILE_TRANSFER_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_FILE_TRANSFER',
-                    className: 'task-bar-button-action file-transfer-action',
+                var FILE_TRANSFER_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_FILE_TRANSFER',
+                    className: 'task-bar-button-file-transfer',
+                    iconClassName: 'fa fa-cloud-upload',
                     callback: v2cDialogService.showFileTransferDialog(function () {
                     })
                 };
@@ -117,9 +119,10 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 /**
                  * Action which displays the help window.
                  */
-                var HELP_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_HELP',
-                    className: 'task-bar-button-action help-action',
+                var HELP_BUTTON= {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_HELP',
+                    className: 'task-bar-button-help',
+                    iconClassName: 'fa fa-question',
                     callback: v2cDialogService.showHelpDialog(function () {
                     })
                 };
@@ -128,40 +131,33 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                  * Action which logs out the current user, redirecting them to back
                  * to the login screen after logout completes.
                  */
-                var LOGOUT_ACTION = {
-                    name: 'V2CLOUD_TASK_BAR.ACTION_V2C_LOGOUT',
-                    className: 'task-bar-button-action logout-action',
+                var LOGOUT_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_LOGOUT',
+                    className: 'task-bar-button-logout',
+                    iconClassName: 'fa fa-sign-out',
                     callback: $scope.logout
-                };
-
-                /**
-                 * V2Cloud Button which always appear in the task bar.
-                 */
-                var V2_BUTTON = {
-                    name: 'V2CLOUD_TASK_BAR.V2_BUTTON',
-                    className: 'task-bar-button-v2',
-                    actions: [
-                        FULL_SCREEN_ACTION,
-                        FIT_SCREEN_ACTION,
-                        FILE_TRANSFER_ACTION,
-                        HELP_ACTION,
-                        LOGOUT_ACTION
-                    ]
                 };
 
                 /**
                  * Button Which toggle the text input bar.
                  */
                 var TOGGLE_TEXT_INPUT_BUTTON = {
-                    name: 'V2CLOUD_TASK_BAR.V2_BUTTON',
-                    className: 'task-bar-button-keyboard fa fa-keyboard-o',
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_INPUT',
+                    className: 'task-bar-button-keyboard',
+                    iconClassName: 'fa fa-keyboard-o',
                     mobileOnly: true,
                     callback: function () {
                         $scope.$emit('v2cToggleTextInput');
                     }
                 };
 
-                $scope.buttons = [V2_BUTTON, TOGGLE_TEXT_INPUT_BUTTON];
+                $scope.buttons = [
+                    TOGGLE_TEXT_INPUT_BUTTON,
+                    FULL_SCREEN_BUTTON,
+                    FILE_TRANSFER_BUTTON,
+                    LOGOUT_BUTTON,
+                    HELP_BUTTON
+                    ];
 
                 $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
                     $scope.shown = isTaskBarShown;
