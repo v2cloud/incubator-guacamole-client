@@ -27,8 +27,8 @@ angular.module('dialog').controller('v2cHelpDialogController',
             title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_DOWNLOAD_FILES",
             type: 'CAROUSEL',
             pages:[
-                {image: 'images/help-dialog-images/download1.png'},
-                {image: 'images/help-dialog-images/download2.png'}
+                {image: 'images/help-dialog-images/download_by_draganddropping.gif'},
+                {image: 'images/help-dialog-images/download_by_saving.gif'}
             ]
         };
 
@@ -36,8 +36,7 @@ angular.module('dialog').controller('v2cHelpDialogController',
             title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_UPLOAD_FILES",
             type: 'CAROUSEL',
             pages:[
-                {image: 'images/help-dialog-images/upload1.png'},
-                {image: 'images/help-dialog-images/upload2.png'}
+                {image: 'images/help-dialog-images/upload.gif'}
             ]
         };
 
@@ -52,8 +51,7 @@ angular.module('dialog').controller('v2cHelpDialogController',
             title: "V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_PRINT",
             type: 'CAROUSEL',
             pages: [
-                {image: 'images/help-dialog-images/print1.png'},
-                {image: 'images/help-dialog-images/print2.png'}
+                {image: 'images/help-dialog-images/upload.gif'}
             ]
         };
 

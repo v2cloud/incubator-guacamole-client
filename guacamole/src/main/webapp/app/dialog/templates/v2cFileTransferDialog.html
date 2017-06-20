@@ -1,13 +1,15 @@
 <div class="modal-header">
     <button aria-hidden="true" class="close" data-dismiss="modal" type="button" ng-click="close()">×</button>
+    <button aria-hidden="true" class="ft-legacy-button" ng-class="{'ft-legacy-button-checked': show_legacy_file_transfer}"
+            data-dismiss="modal" type="button" ng-click="toggle_file_transfer()"></button>
     <h4 class="modal-title" id="myModalLabel">
         File Transfer
     </h4>
 </div>
 <div class="modal-body">
-    <v2c-accordion local-items="drives"></v2c-accordion>
-
-    <div class="text-right">
+    <v2c-accordion local-items="helpPanels" ng-hide="show_legacy_file_transfer"></v2c-accordion>
+    <v2c-accordion local-items="drives" ng-show="show_legacy_file_transfer"></v2c-accordion>
+    <div class="text-right" ng-show="show_legacy_file_transfer">
         <button class="upload-btn" guac-upload="uploadFiles">
             {{'CLIENT.ACTION_UPLOAD_FILES' | translate}}
         </button>

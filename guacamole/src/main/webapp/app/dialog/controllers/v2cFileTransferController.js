@@ -95,7 +95,32 @@ angular.module('dialog').controller('v2cFileTransferController',
                 };
                 $scope.drives.push(drive);
             }
+    
 
+            var PANEL_HOW_TO_DOWNLOAD_FILES = {
+                title: "V2CLOUD_FILE_TRANSFER_PANEL.TITLE_PANEL_HOW_TO_DOWNLOAD_FILES",
+                type: 'CAROUSEL',
+                pages: [
+                    {image: 'images/help-dialog-images/download_by_draganddropping.gif'},
+                    {image: 'images/help-dialog-images/download_by_saving.gif'}
+                ]
+            };
+
+            var PANEL_HOW_TO_UPLOAD_FILES = {
+                title: "V2CLOUD_FILE_TRANSFER_PANEL.TITLE_PANEL_HOW_TO_UPLOAD_FILES",
+                type: 'CAROUSEL',
+                pages: [
+                    {image: 'images/help-dialog-images/upload.gif'}
+                ]
+            };
+
+            $scope.helpPanels = [
+                PANEL_HOW_TO_DOWNLOAD_FILES,
+                PANEL_HOW_TO_UPLOAD_FILES
+            ];
+            
+            $scope.show_legacy_file_transfer = false;
+            
             /**
              * Begins a file upload through the attached Guacamole client for
              * each file in the given FileList.
@@ -121,4 +146,10 @@ angular.module('dialog').controller('v2cFileTransferController',
             $scope.close = function () {
                 $uibModalInstance.close();
             };
+            
+            $scope.toggle_file_transfer = function () {
+                $scope.show_legacy_file_transfer = !$scope.show_legacy_file_transfer;
+            };
+            
+
         }]);

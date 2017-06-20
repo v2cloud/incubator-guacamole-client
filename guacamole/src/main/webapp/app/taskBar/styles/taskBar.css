@@ -81,6 +81,10 @@
     color:#ccc;
 }
 
+.task-bar-button-logout {
+    float:right;
+}
+
 .task-bar {
     background: rgb(58, 58, 58);
     width: 100%;

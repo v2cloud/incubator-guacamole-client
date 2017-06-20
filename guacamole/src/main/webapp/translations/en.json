@@ -732,6 +732,11 @@
         "TITLE_PANEL_HOW_TO_PRINT"              : "How to print",
 
         "TEXT_HOW_TO_COPY_PASTE"                : "Please install the Chrome extension available <a href=\"https://chrome-ext.v2cloud.com\" target=\"blank\">here</a> to enable bidirectional clipboard."
+    },
+
+    "V2CLOUD_FILE_TRANSFER_PANEL" : {
+        "TITLE_PANEL_HOW_TO_DOWNLOAD_FILES"     : "@:V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_DOWNLOAD_FILES",
+        "TITLE_PANEL_HOW_TO_UPLOAD_FILES"       : "@:V2CLOUD_HELP_PANEL.TITLE_PANEL_HOW_TO_UPLOAD_FILES"
     }
 
 }

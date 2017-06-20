@@ -1,10 +1,8 @@
 <div class="task-bar" ng-class="{show:shown}">
-    <div class="task-bar-buttons" ng-repeat="button in buttons">
-        <v2c-task-bar-button button="button"></v2c-task-bar-button>
-    </div>
-    <div class="task-bar-buttons" ng-repeat="button in localButtons">
-        <v2c-task-bar-button button="button"></v2c-task-bar-button>
-    </div>
+    <v2c-task-bar-button button="button"
+                         ng-class="button.className" ng-repeat="button in buttons" ></v2c-task-bar-button>
+    <v2c-task-bar-button button="button"
+                         ng-class="button.className" ng-repeat="button in localButtons" ></v2c-task-bar-button>
 <!--
     <span class="pull-right poweredby-v2">
         Powered by <strong>v2cloud.com</strong>
