@@ -101,8 +101,8 @@ angular.module('dialog').controller('v2cFileTransferController',
                 title: "V2CLOUD_FILE_TRANSFER_PANEL.TITLE_PANEL_HOW_TO_DOWNLOAD_FILES",
                 type: 'CAROUSEL',
                 pages: [
-                    {image: 'images/help-dialog-images/download_by_draganddropping.gif'},
-                    {image: 'images/help-dialog-images/download_by_saving.gif'}
+                    {image: 'images/help-dialog-images/download_by_drag_and_drop.gif'},
+                    {image: 'images/help-dialog-images/download_by_save.gif'}
                 ]
             };
 
@@ -110,7 +110,7 @@ angular.module('dialog').controller('v2cFileTransferController',
                 title: "V2CLOUD_FILE_TRANSFER_PANEL.TITLE_PANEL_HOW_TO_UPLOAD_FILES",
                 type: 'CAROUSEL',
                 pages: [
-                    {image: 'images/help-dialog-images/upload.gif'}
+                    {image: 'images/help-dialog-images/upload_by_drag_and_drop.gif'}
                 ]
             };
 

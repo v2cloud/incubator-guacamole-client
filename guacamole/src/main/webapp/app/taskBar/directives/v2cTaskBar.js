@@ -44,7 +44,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
         },
         templateUrl: 'app/taskBar/templates/v2cTaskBar.html',
         controller: ['$scope', '$route', '$location', '$document', '$window', '$timeout',
-            'v2cDialogService', 'authenticationService', 'fullscreenService',
+            'v2cDialogService', 'authenticationService', 'fullscreenService', '$cookieStore',
             function v2cTaskBarController($scope,
                                           $route,
                                           $location,
@@ -53,11 +53,14 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                                           $timeout,
                                           v2cDialogService,
                                           authenticationService,
-                                          fullscreenService) {
+                                          fullscreenService, 
+                                          $cookieStore) {
 
                 $scope.shown = $scope.taskBarShown;
 
                 var document = $document[0];
+                
+                var FIRST_VISIT_COOKIE_ID = 'V2C_FIRST_VISIT';
 
                 /**
                  * Logs out the current user, redirecting them to back to the root
@@ -116,6 +119,15 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     })
                 };
 
+
+                var openHelpDialogIfFirstVisit = function () {
+                    var data = $cookieStore.get(FIRST_VISIT_COOKIE_ID);
+                    if (!data) {
+                        $cookieStore.put(FIRST_VISIT_COOKIE_ID, 'visited');
+                        v2cDialogService.showHelpDialog(null)();
+                    }
+                };
+                
                 /**
                  * Action which displays the help window.
                  */
@@ -123,9 +135,10 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_HELP',
                     className: 'task-bar-button-help',
                     iconClassName: 'fa fa-question',
-                    callback: v2cDialogService.showHelpDialog(function () {
-                    })
+                    callback: v2cDialogService.showHelpDialog(null)
                 };
+
+                
 
                 /**
                  * Action which logs out the current user, redirecting them to back
@@ -162,6 +175,8 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
                     $scope.shown = isTaskBarShown;
                 });
+
+                $timeout(function () { openHelpDialogIfFirstVisit(); }, 5000);
 
             }]
     }

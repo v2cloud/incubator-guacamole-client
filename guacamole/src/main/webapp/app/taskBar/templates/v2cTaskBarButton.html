@@ -1,5 +1,5 @@
 <div class="task-bar-button-container" ng-show="showButton">
-    <ul class="task-bar-button-menu" ng-class="{open: menuShown}" v2c-click-outside="hideButtonMenu()"
+    <ul class="task-bar-button-menu" ng-class="{'open': menuShown}" v2c-click-outside="hideButtonMenu()"
         v2c-click-outside-ignore="taskbarbutton">
         <li ng-repeat="action in button.actions">
             <a ng-class="action.className" ng-click="action.callback()">
@@ -9,6 +9,6 @@
     </ul>
     <button class="task-bar-button" ng-click="buttonClicked()" id="taskbarbutton">
         <i class="btn-icon" ng-class="button.iconClassName"></i>
-        <div class="btn-name">{{button.name | translate}}</div>
+        <div class="btn-name" ng-class="{'btn-name-visible': !isMobile}" >{{button.name | translate}}</div>
     </button>
 </div>

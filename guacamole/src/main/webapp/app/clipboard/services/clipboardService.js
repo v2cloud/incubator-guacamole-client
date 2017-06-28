@@ -431,7 +431,7 @@ angular.module('clipboard').factory('clipboardService', ['$injector',
                 else
                     deferred.resolve(new ClipboardData({
                         type : 'text/plain',
-                        data : clipboardContent.textContent
+                        data : clipboardContent.textContent.replace(/(?:\u200b)/g, '\r\n')
                     }));
 
             }
