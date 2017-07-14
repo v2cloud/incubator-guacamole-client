@@ -123,7 +123,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 var openHelpDialogIfFirstVisit = function () {
                     var data = $cookieStore.get(FIRST_VISIT_COOKIE_ID);
                     if (!data) {
-                        $cookieStore.put(FIRST_VISIT_COOKIE_ID, 'visited');
+                        document.cookie = FIRST_VISIT_COOKIE_ID + "=visited;expires=Thu, 31 Dec 2037 23:59:59 GMT;path=/";
                         v2cDialogService.showHelpDialog(null)();
                     }
                 };
