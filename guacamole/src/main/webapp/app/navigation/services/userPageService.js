@@ -28,6 +28,8 @@ angular.module('navigation').factory('userPageService', ['$injector',
     var ConnectionGroup  = $injector.get('ConnectionGroup');
     var PageDefinition   = $injector.get('PageDefinition');
     var PermissionSet    = $injector.get('PermissionSet');
+    var $log             = $injector.get('$log');
+    var $location        = $injector.get('$location');
 
     // Get required services
     var $q                       = $injector.get('$q');
@@ -61,32 +63,37 @@ angular.module('navigation').factory('userPageService', ['$injector',
      *     The user's home page.
      */
     var generateHomePage = function generateHomePage(rootGroups) {
-
         var homePage = null;
-
+        var processOnlySharedConnection = false;
         // Determine whether a connection or balancing group should serve as
         // the home page
-        for (var dataSource in rootGroups) {
 
+        var sharableKey;
+        if ($location.search().hasOwnProperty('key'))
+            sharableKey = $location.search()['key'];
+
+        for (var dataSource in rootGroups) {
             // Get corresponding root group
             var rootGroup = rootGroups[dataSource];
-
             // Get children
             var connections      = rootGroup.childConnections      || [];
             var connectionGroups = rootGroup.childConnectionGroups || [];
 
             // Calculate total number of root-level objects
             var totalRootObjects = connections.length + connectionGroups.length;
-
+            var isSharedConnections = dataSource.indexOf('-shared') != -1;
+            
             // If exactly one connection or balancing group is available, use
             // that as the home page
-            if (homePage === null && totalRootObjects === 1) {
+            if (isSharedConnections || (homePage === null && totalRootObjects === 1 && !processOnlySharedConnection)) {
 
-                var connection      = connections[0];
-                var connectionGroup = connectionGroups[0];
-
-                // Only one connection present, use as home page
-                if (connection) {
+                for (var i = 0; i < connections.length; i++) {
+                    var connection = connections[i];
+                    if (isSharedConnections 
+                        && sharableKey 
+                        && connection.identifier !== sharableKey){
+                        continue;
+                    }
                     homePage = new PageDefinition({
                         name : connection.name,
                         url  : '/client/' + ClientIdentifier.toString({
@@ -95,30 +102,41 @@ angular.module('navigation').factory('userPageService', ['$injector',
                             id         : connection.identifier
                         })
                     });
+                    break; // Only one connection present, use as home page
                 }
 
-                // Only one balancing group present, use as home page
-                if (connectionGroup
-                        && connectionGroup.type === ConnectionGroup.Type.BALANCING
+                for (var j = 0; j < connectionGroups.length; j++) {
+                    var connectionGroup = connectionGroups[j];
+                    if (connectionGroup.type === ConnectionGroup.Type.BALANCING
                         && _.isEmpty(connectionGroup.childConnections)
                         && _.isEmpty(connectionGroup.childConnectionGroups)) {
-                    homePage = new PageDefinition({
-                        name : connectionGroup.name,
-                        url  : '/client/' + ClientIdentifier.toString({
-                            dataSource : dataSource,
-                            type       : ClientIdentifier.Types.CONNECTION_GROUP,
-                            id         : connectionGroup.identifier
-                        })
-                    });
+
+                        if (isSharedConnections
+                            && sharableKey
+                            && connectionGroup.identifier !== sharableKey)
+                            continue;
+                        homePage = new PageDefinition({
+                            name: connectionGroup.name,
+                            url: '/client/' + ClientIdentifier.toString({
+                                dataSource: dataSource,
+                                type: ClientIdentifier.Types.CONNECTION_GROUP,
+                                id: connectionGroup.identifier
+                            })
+                        });
+                    }
+                    break; // Only one balancing group present, use as home page
                 }
-
+                if (homePage !== null && isSharedConnections){
+                    break;
+                }
             }
-
             // Otherwise, a connection or balancing group cannot serve as the
             // home page
-            else if (totalRootObjects >= 1) {
+            else if (totalRootObjects >= 1 && !isSharedConnections) {
                 homePage = null;
-                break;
+                // There already more than one normal non-shared connection,
+                // hence no non-shared connection can be a serve as the home page
+                processOnlySharedConnection = true;
             }
 
         } // end for each data source
