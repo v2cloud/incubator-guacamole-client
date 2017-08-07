@@ -175,9 +175,7 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 $scope.$watch('taskBarShown', function taskBarVisibilityChanged(isTaskBarShown) {
                     $scope.shown = isTaskBarShown;
                 });
-
-                $timeout(function () { openHelpDialogIfFirstVisit(); }, 5000);
-
+                
             }]
     }
 }]);
