@@ -118,7 +118,12 @@ angular.module('client').directive('guacClient', [function guacClient() {
              * @type Guacamole.Mouse.Touchpad
              */
             var touchPad = new Guacamole.Mouse.Touchpad(displayContainer);
-
+            
+            /**
+             * Tell if the timeout after what the resize events can be sent has been reached
+             */
+            var display_resize_timeout = false;
+            
             /**
              * Updates the scale of the attached Guacamole.Client based on current window
              * size and "auto-fit" setting.
@@ -271,6 +276,11 @@ angular.module('client').directive('guacClient', [function guacClient() {
                 // Attach possibly new display
                 display = client.getDisplay();
                 display.scale($scope.client.clientProperties.scale);
+                
+                display_resize_timeout = false;
+                $window.setTimeout(function () {
+                    display_resize_timeout = true;
+                }, 3000);
 
                 // Add display element
                 displayElement = display.getElement();
@@ -385,8 +395,7 @@ angular.module('client').directive('guacClient', [function guacClient() {
             // If the element is resized, attempt to resize client
             $scope.mainElementResized = function mainElementResized() {
                 // Send new display size, if changed
-                if (client && display && !isMobile() ) {
-
+                if (client && display && !isMobile() && display_resize_timeout) {
                     var pixelDensity = $window.devicePixelRatio || 1;
                     var width  = main.offsetWidth  * pixelDensity;
                     var height = main.offsetHeight * pixelDensity;
