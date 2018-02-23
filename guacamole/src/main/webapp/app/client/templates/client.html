@@ -40,11 +40,12 @@
     </div>
 
     <!-- Menu -->
-    <div class="menu" ng-class="{open: menu.shown}" id="guac-menu">
+    <div class="menu" ng-class="{open: menu.shown}" id="guac-menu" v2c-click-outside="closeMenu()"
+         v2c-click-outside-ignore="taskbarbutton">
         <div class="menu-content">
 
             <!-- Stationary header -->
-            <div class="header">
+            <div class="header ng-hide">
                 <h2>{{'APP.NAME' | translate}}</h2>
                 <div class="share-menu" ng-show="canShareConnection()">
                     <guac-menu menu-title="'CLIENT.ACTION_SHARE' | translate">
@@ -60,7 +61,7 @@
             <div class="menu-body" guac-touch-drag="menuDrag" guac-scroll="menu.scrollState">
 
                 <!-- Connection sharing -->
-                <div class="menu-section" id="share-links" ng-show="isShared()">
+                <div class="menu-section ng-hide" id="share-links" ng-show="isShared()">
                     <div class="content">
                         <h3>{{'CLIENT.INFO_CONNECTION_SHARED' | translate}}</h3>
                         <p class="description"
@@ -85,7 +86,8 @@
                 </div>
 
                 <!-- Devices -->
-                <div class="menu-section" id="devices" ng-show="client.filesystems.length">
+                <!-- <div class="menu-section ng-hide" id="devices" ng-show="client.filesystems.length">-->
+                <div class="menu-section ng-hide" id="devices">
                     <h3>{{'CLIENT.SECTION_HEADER_DEVICES' | translate}}</h3>
                     <div class="content">
                         <div class="device filesystem" ng-repeat="filesystem in client.filesystems" ng-click="showFilesystemMenu(filesystem)">
@@ -95,7 +97,7 @@
                 </div>
 
                 <!-- Input method -->
-                <div class="menu-section" id="keyboard-settings">
+                <div class="menu-section ng-hide" id="keyboard-settings">
                     <h3>{{'CLIENT.SECTION_HEADER_INPUT_METHOD' | translate}}</h3>
                     <div class="content">
 
@@ -122,7 +124,7 @@
                 </div>
 
                 <!-- Mouse mode -->
-                <div class="menu-section" id="mouse-settings">
+                <div class="menu-section ng-hide" id="mouse-settings">
                     <h3>{{'CLIENT.SECTION_HEADER_MOUSE_MODE' | translate}}</h3>
                     <div class="content">
                         <p class="description">{{'CLIENT.HELP_MOUSE_MODE' | translate}}</p>
@@ -149,7 +151,7 @@
                 </div>
 
                 <!-- Display options -->
-                <div class="menu-section" id="display-settings">
+                <div class="menu-section ng-hide" id="display-settings">
                     <h3>{{'CLIENT.SECTION_HEADER_DISPLAY' | translate}}</h3>
                     <div class="content">
                         <div id="zoom-settings">

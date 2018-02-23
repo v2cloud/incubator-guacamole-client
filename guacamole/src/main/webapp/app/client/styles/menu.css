@@ -20,8 +20,8 @@
 .menu {
     overflow: hidden;
     position: absolute;
-    top: 0;
-    height: 100%;
+    top: 25%;
+    height: 50%;
     max-width: 100%;
     width: 480px;
     background: #EEE;

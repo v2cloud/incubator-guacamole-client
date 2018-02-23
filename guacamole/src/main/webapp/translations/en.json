@@ -33,6 +33,7 @@
         "BUTTON_V2C_HELP"           : "Help",
         "BUTTON_V2C_LOGOUT"         : "Logout",
         "BUTTON_V2C_INPUT"          : "Keyboard",
+        "BUTTON_V2C_TOGGLE_MENU"    : "Copy/Paste",
 
         "DIALOG_HEADER_ERROR" : "Error",
 
@@ -720,6 +721,7 @@
         "ACTION_V2C_RELOAD_PAGE"    : "@:APP.ACTION_V2C_RELOAD_PAGE",
         "BUTTON_V2C_FIT_SCREEN"     : "@:APP.BUTTON_V2C_FIT_SCREEN",
         "BUTTON_V2C_FILE_TRANSFER"  : "@:APP.BUTTON_V2C_FILE_TRANSFER",
+        "BUTTON_V2C_TOGGLE_MENU"    : "@:APP.BUTTON_V2C_TOGGLE_MENU",
         "BUTTON_V2C_HELP"           : "@:APP.BUTTON_V2C_HELP",
         "BUTTON_V2C_LOGOUT"         : "@:APP.BUTTON_V2C_LOGOUT",
         "BUTTON_V2C_INPUT"          : "@:APP.BUTTON_V2C_INPUT"

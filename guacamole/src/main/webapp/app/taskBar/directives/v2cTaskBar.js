@@ -164,10 +164,20 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     }
                 };
 
+                var TOGGLE_MENU_BUTTON = {
+                    name: 'V2CLOUD_TASK_BAR.BUTTON_V2C_TOGGLE_MENU',
+                    className: 'task-bar-button-toggle-menu',
+                    iconClassName: 'fa fa-clipboard',
+                    callback: function () {
+                        $scope.$emit('v2cToggleMenu');
+                    }
+                };
+
                 $scope.buttons = [
                     TOGGLE_TEXT_INPUT_BUTTON,
                     FULL_SCREEN_BUTTON,
                     FILE_TRANSFER_BUTTON,
+                    TOGGLE_MENU_BUTTON,
                     LOGOUT_BUTTON,
                     HELP_BUTTON
                     ];

@@ -72,9 +72,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         ALT_KEYS    = {0xFFE9 : true, 0xFFEA : true, 0xFE03 : true,
                        0xFFE7 : true, 0xFFE8 : true},
         CTRL_KEYS   = {0xFFE3 : true, 0xFFE4 : true},
-        A_KEYS   = {0x0041 : true, 0x0061 : true},
-        Z_KEYS   = {0x005A : true, 0x007A : true},
-        MENU_KEYS   = angular.extend({}, SHIFT_KEYS, ALT_KEYS, CTRL_KEYS, A_KEYS, Z_KEYS);
+        MENU_KEYS   = angular.extend({}, SHIFT_KEYS, ALT_KEYS, CTRL_KEYS);
 
 
     /**
@@ -512,18 +510,16 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             // Check that there is a key pressed for each of the required key classes
             if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(ALT_KEYS, currentKeysPressedKeys)) &&
-               !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))&&
-               !_.isEmpty(_.pick(A_KEYS, currentKeysPressedKeys))&&
-               !_.isEmpty(_.pick(Z_KEYS, currentKeysPressedKeys))
+               !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))
             ) {
         
                 // Don't send this key event through to the client
                 event.preventDefault();
-                
+
                 // Reset the keys pressed
                 keysCurrentlyPressed = {};
                 keyboard.reset();
-                
+
                 // Toggle the menu
                 $scope.$apply(function() {
                     $scope.menu.shown = !$scope.menu.shown;
@@ -562,6 +558,9 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          $scope.showTextInput = !$scope.showTextInput;
      });
 
+     $scope.$on('v2cToggleMenu', function v2cToggleMenu(event){
+         $scope.menu.shown = !$scope.menu.shown;
+     });
             
       /**
      * Displays a notification at the end of a Guacamole connection, whether
