@@ -215,5 +215,4 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
     //   }
     // });
     // }
-            
 }]);
