@@ -47,6 +47,7 @@
     align-items: stretch;
     flex-direction: column;
 
+    flex: auto;
 }
 
 #guac-menu .content > * {
@@ -57,12 +58,16 @@
     -moz-box-flex: 0;
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 auto;
-    flex: 0 0 auto;
 
+    flex: auto;
 }
 
 #guac-menu .content > * + * {
     margin-top: 1em;
+}
+
+#guac-menu .content p {
+    flex: none;
 }
 
 #guac-menu #mouse-settings .choice {
