@@ -49,7 +49,7 @@
     vertical-align: middle;
 }
 
-.task-bar-button:hover .btn-name, .task-bar-button .btn-name-visible {
+.task-bar-button .btn-name-visible {
     opacity: 1;
     height: auto;
     width: auto;

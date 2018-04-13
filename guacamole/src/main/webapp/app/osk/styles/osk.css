@@ -29,7 +29,7 @@
     padding: 0;
     cursor: default;
 
-    text-align: left;
+    /*text-align: left;*/
     vertical-align: middle;
 }
 
@@ -138,34 +138,34 @@
     vertical-align: top;
 }
 
-.guac-keyboard .guac-keyboard-group.guac-keyboard-main {
+/*.guac-keyboard .guac-keyboard-group.guac-keyboard-main {
 
-    /* IE10 */
+    !* IE10 *!
     display: -ms-flexbox;
     -ms-flex-align: stretch;
     -ms-flex-direction: row;
 
-    /* Ancient Mozilla */
+    !* Ancient Mozilla *!
     display: -moz-box;
     -moz-box-align: stretch;
     -moz-box-orient: horizontal;
     
-    /* Ancient WebKit */
+    !* Ancient WebKit *!
     display: -webkit-box;
     -webkit-box-align: stretch;
     -webkit-box-orient: horizontal;
 
-    /* Old WebKit */
+    !* Old WebKit *!
     display: -webkit-flex;
     -webkit-align-items: stretch;
     -webkit-flex-direction: row;
 
-    /* W3C */
+    !* W3C *!
     display: flex;
     align-items: stretch;
     flex-direction: row;
 
-}
+}*/
 
 .guac-keyboard .guac-keyboard-group.guac-keyboard-movement {
     -ms-flex: 1 1 auto;

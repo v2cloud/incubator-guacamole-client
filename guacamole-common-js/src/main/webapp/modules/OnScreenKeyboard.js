@@ -185,6 +185,8 @@ Guacamole.OnScreenKeyboard = function(layout) {
          * @type {Number}
          */
          this.height = height;
+
+         this.element = element;
  
         /**
          * Resizes the associated element, updating its dimensions according to
@@ -202,7 +204,7 @@ Guacamole.OnScreenKeyboard = function(layout) {
             // Scale font, if requested
             if (scaleFont) {
                 element.style.lineHeight = (height * pixels) + "px";
-                element.style.fontSize   = pixels + "px";
+                element.style.fontSize   = (height * pixels) + "px";
             }
 
         };
@@ -446,13 +448,13 @@ Guacamole.OnScreenKeyboard = function(layout) {
 
         // Get pixel size of a unit
         var unit = Math.floor(width * 10 / osk.layout.width) / 10;
+        var max_unit = window.innerHeight / osk.layout.height;
 
         // Resize all scaled elements
-        for (var i=0; i<scaledElements.length; i++) {
+        for (var i = 0; i < scaledElements.length; i++) {
             var scaledElement = scaledElements[i];
-            scaledElement.scale(unit);
+            scaledElement.scale(unit < max_unit ? unit : max_unit);
         }
-
     };
 
     /**
@@ -844,6 +846,8 @@ Guacamole.OnScreenKeyboard.Layout = function(template) {
      * @type {Number}
      */
     this.width = template.width;
+
+    this.height = template.height || -1;
 
     /**
      * The width of each key, in arbitrary units, relative to other keys in

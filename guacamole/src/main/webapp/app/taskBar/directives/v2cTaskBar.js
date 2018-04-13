@@ -62,6 +62,8 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                 
                 var FIRST_VISIT_COOKIE_ID = 'V2C_FIRST_VISIT';
 
+                var iOS = new RegExp("/iPad|iPhone|iPod|Mozilla/").test(navigator.userAgent) && !window.MSStream;
+
                 /**
                  * Logs out the current user, redirecting them to back to the root
                  * after logout completes.
@@ -160,7 +162,11 @@ angular.module('taskBar').directive('v2cTaskBar', [function v2cTaskBar($document
                     iconClassName: 'fa fa-keyboard-o',
                     mobileOnly: true,
                     callback: function () {
-                        $scope.$emit('v2cToggleTextInput');
+                        if (iOS){
+                            $scope.$emit('v2cToggleOSKInput');
+                        }else{
+                            $scope.$emit('v2cToggleTextInput');
+                        }
                     }
                 };
 

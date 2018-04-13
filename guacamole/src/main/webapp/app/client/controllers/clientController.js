@@ -556,6 +556,16 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
      $scope.$on('v2cToggleTextInput', function v2cToggleTextInputListener(event){
          $scope.showTextInput = !$scope.showTextInput;
+         if ($scope.showTextInput){
+             $scope.showOSK = false;
+         }
+     });
+
+     $scope.$on('v2cToggleOSKInput', function v2cToggleOSKInputListener(event){
+         $scope.showOSK       = !$scope.showOSK;
+         if ($scope.showOSK){
+             $scope.showTextInput = false;
+         }
      });
 
      $scope.$on('v2cToggleMenu', function v2cToggleMenu(event){
