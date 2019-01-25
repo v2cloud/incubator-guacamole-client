@@ -206,7 +206,7 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
      *     A promise which resolves with the string of connection parameters to
      *     be passed to the Guacamole client, once the string is ready.
      */
-    var getConnectString = function getConnectString(identifier, connectionParameters) {
+    ManagedClient.getConnectString = function getConnectString(identifier, connectionParameters) {
 
         var deferred = $q.defer();
 
@@ -515,7 +515,7 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
         var clientIdentifier = ClientIdentifier.fromString(id);
 
         // Connect the Guacamole client
-        getConnectString(clientIdentifier, connectionParameters)
+        ManagedClient.getConnectString(clientIdentifier, connectionParameters)
         .then(function connectClient(connectString) {
             client.connect(connectString);
         });
