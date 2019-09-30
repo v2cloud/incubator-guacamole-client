@@ -66,6 +66,7 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
         var Field = $injector.get('Field');
 
         // Required services
+        var $rootScope            = $injector.get('$rootScope');
         var $route                = $injector.get('$route');
         var authenticationService = $injector.get('authenticationService');
         var requestService        = $injector.get('requestService');
@@ -90,6 +91,23 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          * @type Field[]
          */
         $scope.remainingFields = [];
+
+        /**
+         * Whether an authentication attempt has been submitted. This will be
+         * set to true once credentials have been submitted and will only be
+         * reset to false once the attempt has been fully processed, including
+         * rerouting the user to the requested page if the attempt succeeded.
+         *
+         * @type Boolean
+         */
+        $scope.submitted = false;
+
+        /**
+         * The field that is most relevant to the user.
+         *
+         * @type Field
+         */
+        $scope.relevantField = null;
 
         /**
          * Returns whether a previous login attempt is continuing.
@@ -133,6 +151,8 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
                     $scope.enteredValues[field.name] = '';
             });
 
+            $scope.relevantField = getRelevantField();
+
         });
 
         /**
@@ -141,20 +161,26 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          */
         $scope.login = function login() {
 
+            // Authentication is now in progress
+            $scope.submitted = true;
+
             // Start with cleared status
-            $scope.loginError  = null;
+            $scope.loginError = null;
 
             // Attempt login once existing session is destroyed
             authenticationService.authenticate($scope.enteredValues)
 
-            // Clear and reload upon success
+            // Retry route upon success (entered values will be cleared only
+            // after route change has succeeded as this can take time)
             .then(function loginSuccessful() {
-                $scope.enteredValues = {};
                 $route.reload();
             })
 
             // Reset upon failure
             ['catch'](requestService.createErrorCallback(function loginFailed(error) {
+
+                // Initial submission is complete and has failed
+                $scope.submitted = false;
 
                 // Clear out passwords if the credentials were rejected for any reason
                 if (error.type !== Error.Type.INSUFFICIENT_CREDENTIALS) {
@@ -182,6 +208,32 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
             }));
 
         };
+
+        /**
+         * Returns the field most relevant to the user given the current state
+         * of the login process. This will normally be the first empty field.
+         *
+         * @return {Field}
+         *     The field most relevant, null if there is no single most relevant
+         *     field.
+         */
+        var getRelevantField = function getRelevantField() {
+
+            for (var i = 0; i < $scope.remainingFields.length; i++) {
+                var field = $scope.remainingFields[i];
+                if (!$scope.enteredValues[field.name])
+                    return field;
+            }
+
+            return null;
+
+        };
+
+        // Reset state after authentication and routing have succeeded
+        $rootScope.$on('$routeChangeSuccess', function routeChanged() {
+            $scope.enteredValues = {};
+            $scope.submitted = false;
+        });
 
     }];
 

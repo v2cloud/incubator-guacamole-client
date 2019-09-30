@@ -84,6 +84,29 @@ set_optional_property() {
 
 }
 
+# Print error message regarding missing required variables for MySQL authentication
+mysql_missing_vars() {
+   cat <<END
+FATAL: Missing required environment variables
+-------------------------------------------------------------------------------
+If using a MySQL database, you must provide each of the following
+environment variables or their corresponding Docker secrets by appending _FILE
+to the environment variable, and setting the value to the path of the 
+corresponding secret:
+
+    MYSQL_USER         The user to authenticate as when connecting to
+                       MySQL.
+
+    MYSQL_PASSWORD     The password to use when authenticating with MySQL as
+                       MYSQL_USER.
+
+    MYSQL_DATABASE     The name of the MySQL database to use for Guacamole
+                       authentication.
+END
+    exit 1;
+}
+
+
 ##
 ## Adds properties to guacamole.properties which select the MySQL
 ## authentication provider, and configure it to connect to the linked MySQL
@@ -125,32 +148,38 @@ END
         exit 1;
     fi
 
-    # Verify required parameters are present
-    if [ -z "$MYSQL_USER" -o -z "$MYSQL_PASSWORD" -o -z "$MYSQL_DATABASE" ]; then
-        cat <<END
-FATAL: Missing required environment variables
--------------------------------------------------------------------------------
-If using a MySQL database, you must provide each of the following
-environment variables:
 
-    MYSQL_USER         The user to authenticate as when connecting to
-                       MySQL.
+    # Verify that the required Docker secrets are present, else, default to their normal environment variables
+    if [ -n "$MYSQL_USER_FILE" ]; then
+        set_property "mysql-username" `cat $MYSQL_USER_FILE`
+    elif [ -n "$MYSQL_USER" ]; then
+        set_property "mysql-username" "$MYSQL_USER"
+    else
+        mysql_missing_vars
+        exit 1;
+    fi
+    
+    if [ -n "$MYSQL_PASSWORD_FILE" ]; then
+        set_property "mysql-password" `cat $MYSQL_PASSWORD_FILE`
+    elif [ -n "$MYSQL_PASSWORD" ]; then
+        set_property "mysql-password" "$MYSQL_PASSWORD"
+    else
+        mysql_missing_vars
+        exit 1;
+    fi
 
-    MYSQL_PASSWORD     The password to use when authenticating with MySQL as
-                       MYSQL_USER.
-
-    MYSQL_DATABASE     The name of the MySQL database to use for Guacamole
-                       authentication.
-END
+    if [ -n "$MYSQL_DATABASE_FILE" ]; then
+        set_property "mysql-database" `cat $MYSQL_DATABASE_FILE`
+    elif [ -n "$MYSQL_DATABASE" ]; then
+        set_property "mysql-database" "$MYSQL_DATABASE"
+    else
+        mysql_missing_vars
         exit 1;
     fi
 
     # Update config file
     set_property "mysql-hostname" "$MYSQL_HOSTNAME"
     set_property "mysql-port"     "$MYSQL_PORT"
-    set_property "mysql-database" "$MYSQL_DATABASE"
-    set_property "mysql-username" "$MYSQL_USER"
-    set_property "mysql-password" "$MYSQL_PASSWORD"
 
     set_optional_property               \
         "mysql-absolute-max-connections" \
@@ -176,6 +205,28 @@ END
     ln -s /opt/guacamole/mysql/mysql-connector-*.jar "$GUACAMOLE_LIB"
     ln -s /opt/guacamole/mysql/guacamole-auth-*.jar "$GUACAMOLE_EXT"
 
+}
+
+# Print error message regarding missing required variables for PostgreSQL authentication
+postgres_missing_vars() {
+    cat <<END
+FATAL: Missing required environment variables
+-------------------------------------------------------------------------------
+If using a PostgreSQL database, you must provide each of the following
+environment variables or their corresponding Docker secrets by appending _FILE
+to the environment variable, and setting the value to the path of the 
+corresponding secret:
+
+    POSTGRES_USER      The user to authenticate as when connecting to
+                       PostgreSQL.
+
+    POSTGRES_PASSWORD  The password to use when authenticating with PostgreSQL
+                       as POSTGRES_USER.
+
+    POSTGRES_DATABASE  The name of the PostgreSQL database to use for Guacamole
+                       authentication.
+END
+    exit 1;
 }
 
 ##
@@ -221,32 +272,37 @@ END
         exit 1;
     fi
 
-    # Verify required parameters are present
-    if [ -z "$POSTGRES_USER" -o -z "$POSTGRES_PASSWORD" -o -z "$POSTGRES_DATABASE" ]; then
-        cat <<END
-FATAL: Missing required environment variables
--------------------------------------------------------------------------------
-If using a PostgreSQL database, you must provide each of the following
-environment variables:
+    # Verify that the required Docker secrets are present, else, default to their normal environment variables
+    if [ -n "$POSTGRES_USER_FILE" ]; then
+        set_property "postgresql-username" `cat $POSTGRES_USER_FILE`
+    elif [ -n "$POSTGRES_USER" ]; then
+        set_property "postgresql-username" "$POSTGRES_USER"
+    else
+        postgres_missing_vars
+        exit 1;
+    fi
+    
+    if [ -n "$POSTGRES_PASSWORD_FILE" ]; then
+        set_property "postgresql-password" `cat $POSTGRES_PASSWORD_FILE`
+    elif [ -n "$POSTGRES_PASSWORD" ]; then
+        set_property "postgresql-password" "$POSTGRES_PASSWORD"
+    else
+        postgres_missing_vars
+        exit 1;
+    fi
 
-    POSTGRES_USER      The user to authenticate as when connecting to
-                       PostgreSQL.
-
-    POSTGRES_PASSWORD  The password to use when authenticating with PostgreSQL
-                       as POSTGRES_USER.
-
-    POSTGRES_DATABASE  The name of the PostgreSQL database to use for Guacamole
-                       authentication.
-END
+    if [ -n "$POSTGRES_DATABASE_FILE" ]; then
+        set_property "postgresql-database" `cat $POSTGRES_DATABASE_FILE`
+    elif [ -n "$POSTGRES_DATABASE" ]; then
+        set_property "postgresql-database" "$POSTGRES_DATABASE"
+    else
+        postgres_missing_vars
         exit 1;
     fi
 
     # Update config file
     set_property "postgresql-hostname" "$POSTGRES_HOSTNAME"
     set_property "postgresql-port"     "$POSTGRES_PORT"
-    set_property "postgresql-database" "$POSTGRES_DATABASE"
-    set_property "postgresql-username" "$POSTGRES_USER"
-    set_property "postgresql-password" "$POSTGRES_PASSWORD"
 
     set_optional_property               \
         "postgresql-absolute-max-connections" \
@@ -303,22 +359,212 @@ END
     set_property          "ldap-hostname"           "$LDAP_HOSTNAME"
     set_optional_property "ldap-port"               "$LDAP_PORT"
     set_optional_property "ldap-encryption-method"  "$LDAP_ENCRYPTION_METHOD"
-    set_property          "ldap-user-base-dn"       "$LDAP_USER_BASE_DN"
-    set_optional_property "ldap-username-attribute" "$LDAP_USERNAME_ATTRIBUTE"
-    set_optional_property "ldap-group-base-dn"      "$LDAP_GROUP_BASE_DN"
-    set_optional_property "ldap-config-base-dn"     "$LDAP_CONFIG_BASE_DN"
-
-    set_optional_property     \
-        "ldap-search-bind-dn" \
-        "$LDAP_SEARCH_BIND_DN"
+    set_optional_property "ldap-max-search-results" "$LDAP_MAX_SEARCH_RESULTS"
+    set_optional_property "ldap-search-bind-dn"     "$LDAP_SEARCH_BIND_DN"
 
     set_optional_property           \
         "ldap-search-bind-password" \
         "$LDAP_SEARCH_BIND_PASSWORD"
 
+    set_property          "ldap-user-base-dn"       "$LDAP_USER_BASE_DN"
+    set_optional_property "ldap-username-attribute" "$LDAP_USERNAME_ATTRIBUTE"
+    set_optional_property "ldap-member-attribute"   "$LDAP_MEMBER_ATTRIBUTE"
+    set_optional_property "ldap-user-search-filter" "$LDAP_USER_SEARCH_FILTER"
+    set_optional_property "ldap-config-base-dn"     "$LDAP_CONFIG_BASE_DN"
+    set_optional_property "ldap-group-base-dn"      "$LDAP_GROUP_BASE_DN"
+
+    set_optional_property           \
+        "ldap-group-name-attribute" \
+        "$LDAP_GROUP_NAME_ATTRIBUTE"
+
+    set_optional_property           \
+        "ldap-dereference-aliases"  \
+        "$LDAP_DEREFERENCE_ALIASES"
+
+    set_optional_property "ldap-follow-referrals"   "$LDAP_FOLLOW_REFERRALS"
+    set_optional_property "ldap-max-referral-hops"  "$LDAP_MAX_REFERRAL_HOPS"
+    set_optional_property "ldap-operation-timeout"  "$LDAP_OPERATION_TIMEOUT"
+
     # Add required .jar files to GUACAMOLE_EXT
     ln -s /opt/guacamole/ldap/guacamole-auth-*.jar "$GUACAMOLE_EXT"
 
+}
+
+##
+## Adds properties to guacamole.properties which select the LDAP
+## authentication provider, and configure it to connect to the specified LDAP
+## directory.
+##
+associate_radius() {
+
+    # Verify required parameters are present
+    if [ -z "$RADIUS_SHARED_SECRET" -o -z "$RADIUS_AUTH_PROTOCOL" ]; then
+        cat <<END
+FATAL: Missing required environment variables
+-------------------------------------------------------------------------------
+If using RADIUS server, you must provide each of the following environment
+variables:
+
+    RADIUS_SHARED_SECRET   The shared secret to use when talking to the 
+                           RADIUS server.
+
+    RADIUS_AUTH_PROTOCOL   The authentication protocol to use when talking 
+                           to the RADIUS server.
+                           Supported values are: 
+                             pap, chap, mschapv1, mschapv2, eap-md5, 
+                             eap-tls and eap-ttls.
+END
+        exit 1;
+    fi
+
+    # Verify provided files do exist and are readable
+    if [ -n "$RADIUS_KEY_FILE" -a ! -r "$RADIUS_KEY_FILE" ]; then
+       cat <<END
+FATAL: Provided file RADIUS_KEY_FILE=$RADIUS_KEY_FILE does not exist 
+       or is not readable!
+-------------------------------------------------------------------------------
+If you provide key or CA files you need to mount those into the container and
+make sure they are readable for the user in the container.
+END
+        exit 1;
+    fi
+    if [ -n "$RADIUS_CA_FILE" -a ! -r "$RADIUS_CA_FILE" ]; then
+       cat <<END
+FATAL: Provided file RADIUS_CA_FILE=$RADIUS_CA_FILE does not exist 
+       or is not readable!
+-------------------------------------------------------------------------------
+If you provide key or CA files you need to mount those into the container and
+make sure they are readable for the user in the container.
+END
+        exit 1;
+    fi
+    if [ "$RADIUS_AUTH_PROTOCOL" = "eap-ttls" -a -z "$RADIUS_EAP_TTLS_INNER_PROTOCOL" ]; then
+       cat <<END
+FATAL: Authentication protocol "eap-ttls" specified but
+       RADIUS_EAP_TTLS_INNER_PROTOCOL is not set!
+-------------------------------------------------------------------------------
+When EAP-TTLS is used, this parameter specifies the inner (tunneled)
+protocol to use talking to the RADIUS server.
+END
+        exit 1;
+    fi
+
+    # Update config file
+    set_optional_property "radius-hostname"         "$RADIUS_HOSTNAME"
+    set_optional_property "radius-auth-port"        "$RADIUS_AUTH_PORT"
+    set_property          "radius-shared-secret"    "$RADIUS_SHARED_SECRET"
+    set_property          "radius-auth-protocol"    "$RADIUS_AUTH_PROTOCOL"
+    set_optional_property "radius-key-file"         "$RADIUS_KEY_FILE"
+    set_optional_property "radius-key-type"         "$RADIUS_KEY_TYPE"
+    set_optional_property "radius-key-password"     "$RADIUS_KEY_PASSWORD"
+    set_optional_property "radius-ca-file"          "$RADIUS_CA_FILE"
+    set_optional_property "radius-ca-type"          "$RADIUS_CA_TYPE"
+    set_optional_property "radius-ca-password"      "$RADIUS_CA_PASSWORD"
+    set_optional_property "radius-trust-all"        "$RADIUS_TRUST_ALL"
+    set_optional_property "radius-retries"          "$RADIUS_RETRIES"
+    set_optional_property "radius-timeout"          "$RADIUS_TIMEOUT"
+
+    set_optional_property \
+       "radius-eap-ttls-inner-protocol" \
+       "$RADIUS_EAP_TTLS_INNER_PROTOCOL"
+
+    # Add required .jar files to GUACAMOLE_EXT
+    ln -s /opt/guacamole/radius/guacamole-auth-*.jar "$GUACAMOLE_EXT"
+}
+
+## Adds properties to guacamole.properties which select the OPENID
+## authentication provider, and configure it to connect to the specified OPENID
+## provider.
+##
+associate_openid() {
+
+    # Verify required parameters are present
+    if [ -z "$OPENID_AUTHORIZATION_ENDPOINT" ] || \
+       [ -z "$OPENID_JWKS_ENDPOINT" ]          || \
+       [ -z "$OPENID_ISSUER" ]                 || \
+       [ -z "$OPENID_CLIENT_ID" ]              || \          
+       [ -z "$OPENID_REDIRECT_URI" ]
+    then
+        cat <<END
+FATAL: Missing required environment variables
+-------------------------------------------------------------------------------
+If using an openid authentication, you must provide each of the following
+environment variables:
+
+    OPENID_AUTHORIZATION_ENDPOINT   The authorization endpoint (URI) of the OpenID service.
+
+    OPENID_JWKS_ENDPOINT            The endpoint (URI) of the JWKS service which defines
+                                    how received ID tokens (JSON Web Tokens or JWTs) 
+                                    shall be validated.
+
+    OPENID_ISSUER                   The issuer to expect for all received ID tokens.
+
+    OPENID_CLIENT_ID                The OpenID client ID which should be submitted 
+                                    to the OpenID service when necessary. 
+                                    This value is typically provided to you by the OpenID 
+                                    service when OpenID credentials are generated for your application.
+
+    OPENID_REDIRECT_URI             The URI that should be submitted to the OpenID service such that 
+                                    they can redirect the authenticated user back to Guacamole after 
+                                    the authentication process is complete. This must be the full URL 
+                                    that a user would enter into their browser to access Guacamole.
+END
+        exit 1;
+    fi
+
+    # Update config file
+    set_property          "openid-authorization-endpoint"    "$OPENID_AUTHORIZATION_ENDPOINT"
+    set_property          "openid-jwks-endpoint"             "$OPENID_JWKS_ENDPOINT"
+    set_property          "openid-issuer"                    "$OPENID_ISSUER"
+    set_property          "openid-client-id"                 "$OPENID_CLIENT_ID"
+    set_property          "openid-redirect-uri"              "$OPENID_REDIRECT_URI"
+    set_optional_property "openid-username-claim-type"       "$OPENID_USERNAME_CLAIM_TYPE"
+
+    # Add required .jar files to GUACAMOLE_EXT
+    # "1-{}" make it sorted as a first provider (only authentication)
+    # so it can work together with the database providers (authorization)
+    find /opt/guacamole/openid/ -name "*.jar" | awk -F/ '{print $NF}' | \
+    xargs -I '{}' ln -s "/opt/guacamole/openid/{}" "${GUACAMOLE_EXT}/1-{}"
+
+}
+
+##
+## Adds properties to guacamole.properties which configure the Duo two-factor
+## authentication service. Checks to see if all variables are defined and makes sure
+## DUO_APPLICATION_KEY is >= 40 characters.
+##
+associate_duo() {
+    # Verify required parameters are present
+    if [ -z "$DUO_INTEGRATION_KEY" ]      || \
+       [ -z "$DUO_SECRET_KEY" ]           || \
+       [ ${#DUO_APPLICATION_KEY} -lt 40 ]
+    then
+        cat <<END
+FATAL: Missing required environment variables
+-------------------------------------------------------------------------------
+If using the Duo authentication extension, you must provide each of the 
+following environment variables:
+
+    DUO_API_HOSTNAME        The hostname of the Duo API endpoint.
+
+    DUO_INTEGRATION_KEY     The integration key provided for Guacamole by Duo.
+
+    DUO_SECRET_KEY          The secret key provided for Guacamole by Duo. 
+
+    DUO_APPLICATION_KEY     An arbitrary, random key.
+                            This value must be at least 40 characters.
+END
+        exit 1;
+    fi
+
+    # Update config file
+    set_property "duo-api-hostname"                 "$DUO_API_HOSTNAME"
+    set_property "duo-integration-key"              "$DUO_INTEGRATION_KEY"
+    set_property "duo-secret-key"                   "$DUO_SECRET_KEY"
+    set_property "duo-application-key"              "$DUO_APPLICATION_KEY"
+
+    # Add required .jar files to GUACAMOLE_EXT
+    ln -s /opt/guacamole/duo/guacamole-auth-*.jar   "$GUACAMOLE_EXT"
 }
 
 ##
@@ -329,7 +575,8 @@ END
 start_guacamole() {
 
     # Install webapp
-    ln -sf /opt/guacamole/guacamole.war /usr/local/tomcat/webapps/
+    rm -Rf /usr/local/tomcat/webapps/${WEBAPP_CONTEXT:-guacamole}
+    ln -sf /opt/guacamole/guacamole.war /usr/local/tomcat/webapps/${WEBAPP_CONTEXT:-guacamole}.war
 
     # Start tomcat
     cd /usr/local/tomcat
@@ -406,13 +653,13 @@ set_property "guacd-port"     "$GUACD_PORT"
 INSTALLED_AUTH=""
 
 # Use MySQL if database specified
-if [ -n "$MYSQL_DATABASE" ]; then
+if [ -n "$MYSQL_DATABASE" -o -n "$MYSQL_DATABASE_FILE" ]; then
     associate_mysql
     INSTALLED_AUTH="$INSTALLED_AUTH mysql"
 fi
 
 # Use PostgreSQL if database specified
-if [ -n "$POSTGRES_DATABASE" ]; then
+if [ -n "$POSTGRES_DATABASE" -o -n "$POSTGRES_DATABASE_FILE" ]; then
     associate_postgresql
     INSTALLED_AUTH="$INSTALLED_AUTH postgres"
 fi
@@ -421,6 +668,18 @@ fi
 if [ -n "$LDAP_HOSTNAME" ]; then
     associate_ldap
     INSTALLED_AUTH="$INSTALLED_AUTH ldap"
+fi
+
+# Use RADIUS server if specified
+if [ -n "$RADIUS_SHARED_SECRET" ]; then
+    associate_radius
+    INSTALLED_AUTH="$INSTALLED_AUTH radius"
+fi
+
+# Use OPENID if specified
+if [ -n "$OPENID_AUTHORIZATION_ENDPOINT" ]; then
+    associate_openid
+    INSTALLED_AUTH="$INSTALLED_AUTH openid"
 fi
 
 #
@@ -432,12 +691,23 @@ if [ -z "$INSTALLED_AUTH" -a -z "$GUACAMOLE_HOME_TEMPLATE" ]; then
 FATAL: No authentication configured
 -------------------------------------------------------------------------------
 The Guacamole Docker container needs at least one authentication mechanism in
-order to function, such as a MySQL database, PostgreSQL database, or LDAP
-directory.  Please specify at least the MYSQL_DATABASE or POSTGRES_DATABASE
-environment variables, or check Guacamole's Docker documentation regarding
-configuring LDAP and/or custom extensions.
+order to function, such as a MySQL database, PostgreSQL database, LDAP
+directory or RADIUS server. Please specify at least the MYSQL_DATABASE or 
+POSTGRES_DATABASE environment variables, or check Guacamole's Docker 
+documentation regarding configuring LDAP and/or custom extensions.
 END
     exit 1;
+fi
+
+# Use Duo if specified.
+if [ -n "$DUO_API_HOSTNAME" ]; then
+    associate_duo
+fi
+
+# Set logback level if specified
+if [ -n "$LOGBACK_LEVEL" ]; then
+    unzip -o -j /opt/guacamole/guacamole.war WEB-INF/classes/logback.xml -d $GUACAMOLE_HOME
+    sed -i "s/level=\"info\"/level=\"$LOGBACK_LEVEL\"/" $GUACAMOLE_HOME/logback.xml
 fi
 
 #

@@ -87,6 +87,8 @@
         "ERROR_UPLOAD_31D"     : "Ci sono troppi file in coda per il trasferimento. Attendi che siano completati i trasferimenti in atto e riprova.",
         "ERROR_UPLOAD_DEFAULT" : "Si è verificato un errore sul server e la connessione è stata chiusa. Riprova o contatta il tuo amministratore di sistema.",
 
+        "FIELD_PLACEHOLDER_FILTER" : "@:APP.FIELD_PLACEHOLDER_FILTER",
+
         "HELP_CLIPBOARD"           : "Il testo copiato/tagliato appare qui. I cambiamenti effettuati al testo qui sotto saranno riportati negli appunti remoti.",
         "HELP_INPUT_METHOD_NONE"   : "Non c'è nessun metodo di immissione. L'input da tastiera è accettato da una tastiera fisica connessa.",
         "HELP_INPUT_METHOD_OSK"    : "Mostra e accetta input dalla tastiera su schermo. La tastiera su schermo ti permette di scrivere combinazioni di tasti altrimenti mipossibli (ad esempio Ctrl-Alt-Canc).",
@@ -332,6 +334,7 @@
 
         "SECTION_HEADER_AUTHENTICATION"     : "Authentication",
         "SECTION_HEADER_BASIC_PARAMETERS"   : "Basic Settings",
+        "SECTION_HEADER_CLIPBOARD"          : "Appunti",
         "SECTION_HEADER_DEVICE_REDIRECTION" : "Device Redirection",
         "SECTION_HEADER_DISPLAY"            : "Display",
         "SECTION_HEADER_NETWORK"            : "Network",
@@ -372,6 +375,7 @@
         "NAME" : "SSH",
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentication",
+        "SECTION_HEADER_CLIPBOARD"      : "Appunti",
         "SECTION_HEADER_DISPLAY"        : "Display",
         "SECTION_HEADER_NETWORK"        : "Network",
         "SECTION_HEADER_SFTP"           : "SFTP"
@@ -407,6 +411,7 @@
         "NAME" : "Telnet",
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentication",
+        "SECTION_HEADER_CLIPBOARD"      : "Appunti",
         "SECTION_HEADER_DISPLAY"        : "Display",
         "SECTION_HEADER_NETWORK"        : "Network"
 
@@ -422,6 +427,7 @@
         "FIELD_HEADER_ENABLE_AUDIO"     : "Enable audio:",
         "FIELD_HEADER_ENABLE_SFTP"      : "Enable SFTP:",
         "FIELD_HEADER_HOSTNAME"         : "Hostname:",
+        "FIELD_HEADER_USERNAME"         : "Username:",
         "FIELD_HEADER_PASSWORD"         : "Password:",
         "FIELD_HEADER_PORT"             : "Port:",
         "FIELD_HEADER_READ_ONLY"        : "Read-only:",
@@ -566,7 +572,7 @@
         
         "FORMAT_STARTDATE" : "@:APP.FORMAT_DATE_TIME_PRECISE",
 
-        "HELP_SESSIONS" : "All currently-active Guacamole sessions are listed here. If you wish to kill one or more sessions, check the box next to those sessions and click \"Kill Sessions\". Killing a session will immediately disconnect the user from the associated connection.",
+        "HELP_SESSIONS" : "Questa pagina verrà popolata con connessioni attualmente attive. Le connessioni elencate e la possibilità di uccidere tali connessioni dipende dal tuo livello di accesso. Se desideri uccidere una o più sessioni, seleziona la casella accanto a quelle sessioni e fai clic su \"Uccidi sessioni \". L'uccisione di una sessione interromperà immediatamente l'utente dalla connessione associata.",
         
         "INFO_NO_SESSIONS" : "Nessuna sessione attiva",
 

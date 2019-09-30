@@ -448,6 +448,31 @@ Guacamole.Client = function(tunnel) {
     };
 
     /**
+     * Opens a new argument value stream for writing, having the given
+     * parameter name and mimetype, requesting that the connection parameter
+     * with the given name be updated to the value described by the contents
+     * of the following stream. The instruction necessary to create this stream
+     * will automatically be sent.
+     *
+     * @param {String} mimetype
+     *     The mimetype of the data being sent.
+     *
+     * @param {String} name
+     *     The name of the connection parameter to attempt to update.
+     *
+     * @return {Guacamole.OutputStream}
+     *     The created argument value stream.
+     */
+    this.createArgumentValueStream = function createArgumentValueStream(mimetype, name) {
+
+        // Allocate and associate stream with argument value metadata
+        var stream = guac_client.createOutputStream();
+        tunnel.sendMessage("argv", stream.index, mimetype, name);
+        return stream;
+
+    };
+
+    /**
      * Creates a new output stream associated with the given object and having
      * the given mimetype and name. The legality of a mimetype and name is
      * dictated by the object itself. The instruction necessary to create this
@@ -623,6 +648,23 @@ Guacamole.Client = function(tunnel) {
      *     used.
      */
     this.onvideo = null;
+
+    /**
+     * Fired when the current value of a connection parameter is being exposed
+     * by the server.
+     *
+     * @event
+     * @param {Guacamole.InputStream} stream
+     *     The stream that will receive connection parameter data from the
+     *     server.
+     *
+     * @param {String} mimetype
+     *     The mimetype of the data which will be received.
+     *
+     * @param {String} name
+     *     The name of the connection parameter whose value is being exposed.
+     */
+    this.onargv = null;
 
     /**
      * Fired when the clipboard of the remote client is changing.
@@ -818,6 +860,24 @@ Guacamole.Client = function(tunnel) {
             var negative = parseInt(parameters[6]);
 
             display.arc(layer, x, y, radius, startAngle, endAngle, negative != 0);
+
+        },
+
+        "argv": function(parameters) {
+
+            var stream_index = parseInt(parameters[0]);
+            var mimetype = parameters[1];
+            var name = parameters[2];
+
+            // Create stream
+            if (guac_client.onargv) {
+                var stream = streams[stream_index] = new Guacamole.InputStream(guac_client, stream_index);
+                guac_client.onargv(stream, mimetype, name);
+            }
+
+            // Otherwise, unsupported
+            else
+                guac_client.sendAck(stream_index, "Receiving argument values unsupported", 0x0100);
 
         },
 

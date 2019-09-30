@@ -1,6 +1,6 @@
 {
 
-    "guacamoleVersion" : "1.0.0",
+    "guacamoleVersion" : "1.1.0",
 
     "name"      : "RADIUS Authentication Backend",
     "namespace" : "radius",
@@ -10,7 +10,9 @@
     ],
 
     "translations" : [
-        "translations/en.json"
+        "translations/de.json",
+        "translations/en.json",
+        "translations/ja.json"
     ],
 
     "js" : [
@@ -18,7 +20,6 @@
     ],
 
     "resources" : {
-        "templates/radiusResponseField.html" : "text/html",
         "templates/radiusStateField.html"    : "text/html"
     }
 

@@ -58,7 +58,7 @@ public abstract class RemoteAuthenticatedUser implements AuthenticatedUser {
      * @param authenticationProvider
      *     The AuthenticationProvider that has authenticated the given user.
      *
-     * @param credentials 
+     * @param credentials
      *     The credentials given by the user when they authenticated.
      *
      * @param effectiveGroups

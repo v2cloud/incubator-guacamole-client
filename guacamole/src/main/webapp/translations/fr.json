@@ -91,6 +91,8 @@
         "ERROR_UPLOAD_31D"     : "Trop de fichiers sont actuellement transférés. Merci d'attendre que les transferts en cours soient terminés et de réessayer plus tard.", 
         "ERROR_UPLOAD_DEFAULT" : "Une erreur interne est apparue dans le serveur Guacamole et la connexion a été fermée. Si le problème persiste, merci de notifier l'administrateur ou de regarder les journaux système.",
 
+        "FIELD_PLACEHOLDER_FILTER" : "@:APP.FIELD_PLACEHOLDER_FILTER",
+
         "HELP_CLIPBOARD"           : "Texte copié/coupé dans Guacamole apparaîtra ici. Changer le texte ci dessous affectera le presse-papiers distant.",
         "HELP_INPUT_METHOD_NONE"   : "Aucune méthode de saisie utilisée. Clavier accepté depuis un clavier physique connecté.",
         "HELP_INPUT_METHOD_OSK"    : "Affiche et utilise la saisie du clavier virtuel intégré dans Guacamole. Le clavier virtuel permet d'utiliser des combinaisons de touches autrement impossibles (comme Ctrl-Alt-Supp).",
@@ -356,6 +358,7 @@
 
         "SECTION_HEADER_AUTHENTICATION"     : "Authentification",
         "SECTION_HEADER_BASIC_PARAMETERS"   : "Paramètres de base",
+        "SECTION_HEADER_CLIPBOARD"          : "Presse-papiers",
         "SECTION_HEADER_DEVICE_REDIRECTION" : "Redirection Périphérique",
         "SECTION_HEADER_DISPLAY"            : "Affichage",
         "SECTION_HEADER_NETWORK"            : "Réseau",
@@ -406,6 +409,7 @@
         "NAME" : "SSH",
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentification",
+        "SECTION_HEADER_CLIPBOARD"      : "Presse-papiers",
         "SECTION_HEADER_DISPLAY"        : "Affichage",
         "SECTION_HEADER_NETWORK"        : "Réseau",
         "SECTION_HEADER_SESSION"        : "Session / Environnement",
@@ -450,6 +454,7 @@
         "NAME" : "Telnet",
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentification",
+        "SECTION_HEADER_CLIPBOARD"      : "Presse-papiers",
         "SECTION_HEADER_DISPLAY"        : "Affichage",
         "SECTION_HEADER_NETWORK"        : "Réseau"
 
@@ -466,6 +471,7 @@
         "FIELD_HEADER_ENABLE_AUDIO"     : "Activer son:",
         "FIELD_HEADER_ENABLE_SFTP"      : "Activer SFTP:",
         "FIELD_HEADER_HOSTNAME"         : "Nom d'hôte:",
+        "FIELD_HEADER_USERNAME"         : "Identifiant:",
         "FIELD_HEADER_PASSWORD"         : "Mot de passe:",
         "FIELD_HEADER_PORT"             : "Port:",
         "FIELD_HEADER_READ_ONLY"        : "Lecture seule:",
@@ -624,7 +630,7 @@
         
         "FORMAT_STARTDATE" : "@:APP.FORMAT_DATE_TIME_PRECISE",
 
-        "HELP_SESSIONS" : "Toutes les connexions actives Guacamole sont listées ici. Si vous souhaitez en fermer une ou plusieurs, sélectionner les et cliquer sur \"Fermer Sessions\". La fermeture d'une session déconnectera immédiatement l'utilisateur.", 
+        "HELP_SESSIONS" : "Cette page sera remplie avec des connexions actuellement actives. Les connexions répertoriées et la possibilité de supprimer ces connexions dépendent de votre niveau d'accès. Si vous souhaitez en fermer une ou plusieurs, sélectionner les et cliquer sur \"Fermer Sessions\". La fermeture d'une session déconnectera immédiatement l'utilisateur.", 
         
         "INFO_NO_SESSIONS" : "Pas de session ouverte",
 

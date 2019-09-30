@@ -24,22 +24,26 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         function clientController($scope, $routeParams, $injector) {
 
     // Required types
+    var ConnectionGroup    = $injector.get('ConnectionGroup');
     var ManagedClient      = $injector.get('ManagedClient');
     var ManagedClientState = $injector.get('ManagedClientState');
     var ManagedFilesystem  = $injector.get('ManagedFilesystem');
+    var Protocol           = $injector.get('Protocol');
     var ScrollState        = $injector.get('ScrollState');
 
     // Required services
-    var $location             = $injector.get('$location');
-    var authenticationService = $injector.get('authenticationService');
-    var clipboardService      = $injector.get('clipboardService');
-    var guacClientManager     = $injector.get('guacClientManager');
-    var guacNotification      = $injector.get('guacNotification');
-    var iconService           = $injector.get('iconService');
-    var preferenceService     = $injector.get('preferenceService');
-    var requestService        = $injector.get('requestService');
-    var tunnelService         = $injector.get('tunnelService');
-    var userPageService       = $injector.get('userPageService');
+    var $location              = $injector.get('$location');
+    var authenticationService  = $injector.get('authenticationService');
+    var connectionGroupService = $injector.get('connectionGroupService');
+    var clipboardService       = $injector.get('clipboardService');
+    var dataSourceService      = $injector.get('dataSourceService');
+    var guacClientManager      = $injector.get('guacClientManager');
+    var guacNotification       = $injector.get('guacNotification');
+    var iconService            = $injector.get('iconService');
+    var preferenceService      = $injector.get('preferenceService');
+    var requestService         = $injector.get('requestService');
+    var tunnelService          = $injector.get('tunnelService');
+    var userPageService        = $injector.get('userPageService');
 
     /**
      * The minimum number of pixels a drag gesture must move to result in the
@@ -248,7 +252,15 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          *
          * @type ScrollState
          */
-        scrollState : new ScrollState()
+        scrollState : new ScrollState(),
+
+        /**
+         * The current desired values of all editable connection parameters as
+         * a set of name/value pairs, including any changes made by the user.
+         *
+         * @type {Object.<String, String>}
+         */
+        connectionParameters : {}
 
     };
 
@@ -258,11 +270,79 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     };
 
     /**
+     * Applies any changes to connection parameters made by the user within the
+     * Guacamole menu.
+     */
+    $scope.applyParameterChanges = function applyParameterChanges() {
+        angular.forEach($scope.menu.connectionParameters, function sendArgv(value, name) {
+            ManagedClient.setArgument($scope.client, name, value);
+        });
+    };
+
+    /**
      * The client which should be attached to the client UI.
      *
      * @type ManagedClient
      */
     $scope.client = guacClientManager.getManagedClient($routeParams.id, $routeParams.params);
+
+    /**
+     * All active clients which are not the current client ($scope.client).
+     * Each key is the ID of the connection used by that client.
+     *
+     * @type Object.<String, ManagedClient>
+     */
+    $scope.otherClients = (function getOtherClients(clients) {
+        var otherClients = angular.extend({}, clients);
+        delete otherClients[$scope.client.id];
+        return otherClients;
+    })(guacClientManager.getManagedClients());
+
+    /**
+     * The root connection groups of the connection hierarchy that should be
+     * presented to the user for selecting a different connection, as a map of
+     * data source identifier to the root connection group of that data
+     * source. This will be null if the connection group hierarchy has not yet
+     * been loaded or if the hierarchy is inapplicable due to only one
+     * connection or balancing group being available.
+     *
+     * @type Object.<String, ConnectionGroup>
+     */
+    $scope.rootConnectionGroups = null;
+
+    /**
+     * Array of all connection properties that are filterable.
+     *
+     * @type String[]
+     */
+    $scope.filteredConnectionProperties = [
+        'name'
+    ];
+
+    /**
+     * Array of all connection group properties that are filterable.
+     *
+     * @type String[]
+     */
+    $scope.filteredConnectionGroupProperties = [
+        'name'
+    ];
+
+    // Retrieve root groups and all descendants
+    dataSourceService.apply(
+        connectionGroupService.getConnectionGroupTree,
+        authenticationService.getAvailableDataSources(),
+        ConnectionGroup.ROOT_IDENTIFIER
+    )
+    .then(function rootGroupsRetrieved(rootConnectionGroups) {
+
+        // Store retrieved groups only if there are multiple connections or
+        // balancing groups available
+        var clientPages = userPageService.getClientPages(rootConnectionGroups);
+        if (clientPages.length > 1)
+            $scope.rootConnectionGroups = rootConnectionGroups;
+
+    }, requestService.WARN);
 
     /**
      * Map of all available sharing profiles for the current connection by
@@ -429,15 +509,29 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     });
 
+    // Update client state/behavior as visibility of the Guacamole menu changes
     $scope.$watch('menu.shown', function menuVisibilityChanged(menuShown, menuShownPreviousState) {
         
-        // Send clipboard data if menu is hidden
-        if (!menuShown && menuShownPreviousState)
+        // Send clipboard and argument value data once menu is hidden
+        if (!menuShown && menuShownPreviousState) {
             $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
-        
+            $scope.applyParameterChanges();
+        }
+
+        // Obtain snapshot of current editable connection parameters when menu
+        // is opened
+        else if (menuShown)
+            $scope.menu.connectionParameters = ManagedClient.getArgumentModel($scope.client);
+
         // Disable client keyboard if the menu is shown
         $scope.client.clientProperties.keyboardEnabled = !menuShown;
 
+    });
+
+    // Update last used timestamp when the active client changes
+    $scope.$watch('client', function clientChanged(client) {
+        if (client)
+            client.lastUsed = new Date().getTime();
     });
 
     // Update page icon when thumbnail changes
@@ -804,6 +898,11 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     // Set client-specific menu actions
     $scope.clientMenuActions = [ DISCONNECT_MENU_ACTION ];
+
+    /**
+     * @borrows Protocol.getNamespace
+     */
+    $scope.getProtocolNamespace = Protocol.getNamespace;
 
     /**
      * The currently-visible filesystem within the filesystem menu, if the

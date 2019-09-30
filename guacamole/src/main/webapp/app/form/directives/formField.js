@@ -53,7 +53,22 @@ angular.module('form').directive('guacFormField', [function formField() {
              *
              * @type String
              */
-            model : '='
+            model : '=',
+
+            /**
+             * Whether this field should be rendered as disabled. By default,
+             * form fields are enabled.
+             *
+             * @type Boolean
+             */
+            disabled : '=',
+
+            /**
+             * Whether this field should be focused.
+             *
+             * @type Boolean
+             */
+            focused : '='
 
         },
         templateUrl: 'app/form/templates/formField.html',
@@ -71,6 +86,18 @@ angular.module('form').directive('guacFormField', [function formField() {
              * @type Element[]
              */
             var fieldContent = $element.find('.form-field');
+
+            /**
+             * An ID value which is reasonably likely to be unique relative to
+             * other elements on the page. This ID should be used to associate
+             * the relevant input element with the label provided by the
+             * guacFormField directive, if there is such an input element.
+             *
+             * @type String
+             */
+            $scope.fieldId = 'guac-field-XXXXXXXXXXXXXXXX'.replace(/X/g, function getRandomCharacter() {
+                return Math.floor(Math.random() * 36).toString(36);
+            }) + '-' + new Date().getTime().toString(36);
 
             /**
              * Produces the translation string for the header of the current
@@ -119,7 +146,7 @@ angular.module('form').directive('guacFormField', [function formField() {
             $scope.getFieldOption = function getFieldOption(value) {
 
                 // If no field, or no value, then no corresponding translation string
-                if (!$scope.field || !$scope.field.name || !value)
+                if (!$scope.field || !$scope.field.name)
                     return '';
 
                 return translationStringService.canonicalize($scope.namespace || 'MISSING_NAMESPACE')

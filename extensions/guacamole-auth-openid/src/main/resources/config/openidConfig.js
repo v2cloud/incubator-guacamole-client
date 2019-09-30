@@ -31,24 +31,3 @@ angular.module('guacOpenID').config(['formServiceProvider',
     });
 
 }]);
-
-/**
- * Config block which augments the existing routing, providing special handling
- * for the "id_token=" fragments provided by OpenID Connect.
- */
-angular.module('index').config(['$routeProvider',
-        function indexRouteConfig($routeProvider) {
-
-    // Transform "/#/id_token=..." to "/#/?id_token=..."
-    $routeProvider.when('/id_token=:response', {
-
-        template   : '',
-        controller : ['$location', function reroute($location) {
-            var params = $location.path().substring(1);
-            $location.url('/');
-            $location.search(params);
-        }]
-
-    });
-
-}]);

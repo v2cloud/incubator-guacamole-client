@@ -20,6 +20,10 @@
             "name"  : "authentication",
             "fields" : [
                 {
+                    "name"  : "username",
+                    "type"  : "USERNAME"
+                },
+                {
                     "name"  : "password",
                     "type"  : "PASSWORD"
                 }
@@ -59,6 +63,16 @@
                     "name"    : "clipboard-encoding",
                     "type"    : "ENUM",
                     "options" : [ "", "ISO8859-1", "UTF-8", "UTF-16", "CP1252" ]
+                },
+                {
+                    "name"    : "disable-copy",
+                    "type"    : "BOOLEAN",
+                    "options" : [ "true" ]
+                },
+                {
+                    "name"    : "disable-paste",
+                    "type"    : "BOOLEAN",
+                    "options" : [ "true" ]
                 }
             ]
         },

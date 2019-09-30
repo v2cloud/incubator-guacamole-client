@@ -32,6 +32,7 @@
 
         "DIALOG_HEADER_ERROR" : "Error",
 
+        "ERROR_PAGE_UNAVAILABLE"  : "An error has occurred and this action cannot be completed. If the problem persists, please notify your system administrator or check your system logs.",
         "ERROR_PASSWORD_BLANK"    : "Your password cannot be blank.",
         "ERROR_PASSWORD_MISMATCH" : "The provided passwords do not match.",
         
@@ -95,7 +96,7 @@
 
         "ERROR_UPLOAD_100"     : "File transfer is either not supported or not enabled. Please contact your system administrator, or check your system logs.",
         "ERROR_UPLOAD_201"     : "Too many files are currently being transferred. Please wait for existing transfers to complete, and then try again.",
-        "ERROR_UPLOAD_202"     : "The file cannot be transferred because the remote desktop server is taking too long to respond. Please try again or or contact your system administrator.",
+        "ERROR_UPLOAD_202"     : "The file cannot be transferred because the remote desktop server is taking too long to respond. Please try again or contact your system administrator.",
         "ERROR_UPLOAD_203"     : "The remote desktop server encountered an error during transfer. Please try again or contact your system administrator.",
         "ERROR_UPLOAD_204"     : "The destination for the file transfer does not exist. Please check that the destination exists and try again.",
         "ERROR_UPLOAD_205"     : "The destination for the file transfer is currently locked. Please wait for any in-progress tasks to complete and try again.",
@@ -104,6 +105,8 @@
         "ERROR_UPLOAD_308"     : "The file transfer has stalled. This is commonly caused by network problems, such as spotty wireless signal, or simply very slow network speeds. Please check your network and try again.",
         "ERROR_UPLOAD_31D"     : "Too many files are currently being transferred. Please wait for existing transfers to complete, and then try again.",
         "ERROR_UPLOAD_DEFAULT" : "An internal error has occurred within the Guacamole server, and the connection has been terminated. If the problem persists, please notify your system administrator, or check your system logs.",
+
+        "FIELD_PLACEHOLDER_FILTER" : "@:APP.FIELD_PLACEHOLDER_FILTER",
 
         "HELP_CLIPBOARD"           : "Text copied/cut within Guacamole will appear here. Changes to the text below will affect the remote clipboard.",
         "HELP_INPUT_METHOD_NONE"   : "No input method is used. Keyboard input is accepted from a connected, physical keyboard.",
@@ -144,6 +147,22 @@
         "TEXT_FILE_TRANSFER_PROGRESS"     : "{PROGRESS} {UNIT, select, b{B} kb{KB} mb{MB} gb{GB} other{}}",
 
         "URL_OSK_LAYOUT" : "layouts/en-us-qwerty.json"
+
+    },
+
+    "COLOR_SCHEME" : {
+
+        "ACTION_CANCEL"       : "@:APP.ACTION_CANCEL",
+        "ACTION_HIDE_DETAILS" : "Hide",
+        "ACTION_SAVE"         : "@:APP.ACTION_SAVE",
+        "ACTION_SHOW_DETAILS" : "Show",
+
+        "FIELD_HEADER_BACKGROUND" : "Background",
+        "FIELD_HEADER_FOREGROUND" : "Foreground",
+
+        "FIELD_OPTION_CUSTOM" : "Custom...",
+
+        "SECTION_HEADER_DETAILS" : "Details:"
 
     },
 
@@ -361,7 +380,73 @@
         "TEXT_CONFIRM_DELETE" : "Groups cannot be restored after they have been deleted. Are you sure you want to delete this group?"
 
     },
-    
+
+    "PROTOCOL_KUBERNETES" : {
+
+        "FIELD_HEADER_BACKSPACE"       : "Backspace key sends:",
+        "FIELD_HEADER_CA_CERT"         : "Certificate authority certificate:",
+        "FIELD_HEADER_CLIENT_CERT"     : "Client certificate:",
+        "FIELD_HEADER_CLIENT_KEY"      : "Client key:",
+        "FIELD_HEADER_COLOR_SCHEME"    : "Color scheme:",
+        "FIELD_HEADER_CONTAINER"       : "Container name:",
+        "FIELD_HEADER_CREATE_RECORDING_PATH"  : "Automatically create recording path:",
+        "FIELD_HEADER_CREATE_TYPESCRIPT_PATH" : "Automatically create typescript path:",
+        "FIELD_HEADER_FONT_NAME"       : "Font name:",
+        "FIELD_HEADER_FONT_SIZE"       : "Font size:",
+        "FIELD_HEADER_HOSTNAME"        : "Hostname:",
+        "FIELD_HEADER_IGNORE_CERT"     : "Ignore server certificate:",
+        "FIELD_HEADER_NAMESPACE"       : "Namespace:",
+        "FIELD_HEADER_POD"             : "Pod name:",
+        "FIELD_HEADER_PORT"            : "Port:",
+        "FIELD_HEADER_READ_ONLY"       : "Read-only:",
+        "FIELD_HEADER_RECORDING_EXCLUDE_MOUSE"  : "Exclude mouse:",
+        "FIELD_HEADER_RECORDING_EXCLUDE_OUTPUT" : "Exclude graphics/streams:",
+        "FIELD_HEADER_RECORDING_INCLUDE_KEYS"   : "Include key events:",
+        "FIELD_HEADER_RECORDING_NAME"  : "Recording name:",
+        "FIELD_HEADER_RECORDING_PATH"  : "Recording path:",
+        "FIELD_HEADER_SCROLLBACK"      : "Maximum scrollback size:",
+        "FIELD_HEADER_TYPESCRIPT_NAME" : "Typescript name:",
+        "FIELD_HEADER_TYPESCRIPT_PATH" : "Typescript path:",
+        "FIELD_HEADER_USE_SSL"         : "Use SSL/TLS",
+
+        "FIELD_OPTION_BACKSPACE_EMPTY" : "",
+        "FIELD_OPTION_BACKSPACE_8"     : "Backspace (Ctrl-H)",
+        "FIELD_OPTION_BACKSPACE_127"   : "Delete (Ctrl-?)",
+
+        "FIELD_OPTION_COLOR_SCHEME_BLACK_WHITE" : "Black on white",
+        "FIELD_OPTION_COLOR_SCHEME_EMPTY"       : "",
+        "FIELD_OPTION_COLOR_SCHEME_GRAY_BLACK"  : "Gray on black",
+        "FIELD_OPTION_COLOR_SCHEME_GREEN_BLACK" : "Green on black",
+        "FIELD_OPTION_COLOR_SCHEME_WHITE_BLACK" : "White on black",
+
+        "FIELD_OPTION_FONT_SIZE_8"     : "8",
+        "FIELD_OPTION_FONT_SIZE_9"     : "9",
+        "FIELD_OPTION_FONT_SIZE_10"    : "10",
+        "FIELD_OPTION_FONT_SIZE_11"    : "11",
+        "FIELD_OPTION_FONT_SIZE_12"    : "12",
+        "FIELD_OPTION_FONT_SIZE_14"    : "14",
+        "FIELD_OPTION_FONT_SIZE_18"    : "18",
+        "FIELD_OPTION_FONT_SIZE_24"    : "24",
+        "FIELD_OPTION_FONT_SIZE_30"    : "30",
+        "FIELD_OPTION_FONT_SIZE_36"    : "36",
+        "FIELD_OPTION_FONT_SIZE_48"    : "48",
+        "FIELD_OPTION_FONT_SIZE_60"    : "60",
+        "FIELD_OPTION_FONT_SIZE_72"    : "72",
+        "FIELD_OPTION_FONT_SIZE_96"    : "96",
+        "FIELD_OPTION_FONT_SIZE_EMPTY" : "",
+
+        "NAME" : "Kubernetes",
+
+        "SECTION_HEADER_AUTHENTICATION" : "Authentication",
+        "SECTION_HEADER_BEHAVIOR"       : "Terminal behavior",
+        "SECTION_HEADER_CONTAINER"      : "Container",
+        "SECTION_HEADER_DISPLAY"        : "Display",
+        "SECTION_HEADER_RECORDING"      : "Screen Recording",
+        "SECTION_HEADER_TYPESCRIPT"     : "Typescript (Text Session Recording)",
+        "SECTION_HEADER_NETWORK"        : "Network"
+
+    },
+
     "PROTOCOL_RDP" : {
 
         "FIELD_HEADER_CLIENT_NAME"     : "Client name:",
@@ -372,6 +457,8 @@
         "FIELD_HEADER_CREATE_RECORDING_PATH" : "Automatically create recording path:",
         "FIELD_HEADER_DISABLE_AUDIO"   : "Disable audio:",
         "FIELD_HEADER_DISABLE_AUTH"    : "Disable authentication:",
+        "FIELD_HEADER_DISABLE_COPY"    : "Disable copying from remote desktop:",
+        "FIELD_HEADER_DISABLE_PASTE"   : "Disable pasting from client:",
         "FIELD_HEADER_DOMAIN"          : "Domain:",
         "FIELD_HEADER_DPI"             : "Resolution (DPI):",
         "FIELD_HEADER_DRIVE_NAME"      : "Drive name:",
@@ -427,6 +514,7 @@
         "FIELD_HEADER_SFTP_ROOT_DIRECTORY"        : "File browser root directory:",
         "FIELD_HEADER_SFTP_USERNAME"              : "Username:",
         "FIELD_HEADER_STATIC_CHANNELS" : "Static channel names:",
+        "FIELD_HEADER_TIMEZONE"        : "Time zone:",
         "FIELD_HEADER_USERNAME"        : "Username:",
         "FIELD_HEADER_WIDTH"           : "Width:",
 
@@ -446,6 +534,7 @@
         "FIELD_OPTION_SECURITY_RDP"   : "RDP encryption",
         "FIELD_OPTION_SECURITY_TLS"   : "TLS encryption",
 
+        "FIELD_OPTION_SERVER_LAYOUT_DE_CH_QWERTZ" : "Swiss German (Qwertz)",
         "FIELD_OPTION_SERVER_LAYOUT_DE_DE_QWERTZ" : "German (Qwertz)",
         "FIELD_OPTION_SERVER_LAYOUT_EMPTY"        : "",
         "FIELD_OPTION_SERVER_LAYOUT_EN_GB_QWERTY" : "UK English (Qwerty)",
@@ -454,16 +543,19 @@
         "FIELD_OPTION_SERVER_LAYOUT_FAILSAFE"     : "Unicode",
         "FIELD_OPTION_SERVER_LAYOUT_FR_CH_QWERTZ" : "Swiss French (Qwertz)",
         "FIELD_OPTION_SERVER_LAYOUT_FR_FR_AZERTY" : "French (Azerty)",
+        "FIELD_OPTION_SERVER_LAYOUT_HU_HU_QWERTZ" : "Hungarian (Qwertz)",        
         "FIELD_OPTION_SERVER_LAYOUT_IT_IT_QWERTY" : "Italian (Qwerty)",
         "FIELD_OPTION_SERVER_LAYOUT_JA_JP_QWERTY" : "Japanese (Qwerty)",
         "FIELD_OPTION_SERVER_LAYOUT_PT_BR_QWERTY" : "Portuguese Brazilian (Qwerty)",
         "FIELD_OPTION_SERVER_LAYOUT_SV_SE_QWERTY" : "Swedish (Qwerty)",
+        "FIELD_OPTION_SERVER_LAYOUT_DA_DK_QWERTY" : "Danish (Qwerty)",
         "FIELD_OPTION_SERVER_LAYOUT_TR_TR_QWERTY" : "Turkish-Q (Qwerty)",
 
         "NAME" : "RDP",
 
         "SECTION_HEADER_AUTHENTICATION"     : "Authentication",
         "SECTION_HEADER_BASIC_PARAMETERS"   : "Basic Settings",
+        "SECTION_HEADER_CLIPBOARD"          : "Clipboard",
         "SECTION_HEADER_DEVICE_REDIRECTION" : "Device Redirection",
         "SECTION_HEADER_DISPLAY"            : "Display",
         "SECTION_HEADER_GATEWAY"            : "Remote Desktop Gateway",
@@ -484,16 +576,20 @@
         "FIELD_HEADER_COMMAND"      : "Execute command:",
         "FIELD_HEADER_CREATE_RECORDING_PATH" : "Automatically create recording path:",
         "FIELD_HEADER_CREATE_TYPESCRIPT_PATH" : "Automatically create typescript path:",
+        "FIELD_HEADER_DISABLE_COPY"  : "Disable copying from terminal:",
+        "FIELD_HEADER_DISABLE_PASTE" : "Disable pasting from client:",
         "FIELD_HEADER_FONT_NAME"     : "Font name:",
         "FIELD_HEADER_FONT_SIZE"     : "Font size:",
         "FIELD_HEADER_ENABLE_SFTP"   : "Enable SFTP:",
         "FIELD_HEADER_HOST_KEY"      : "Public host key (Base64):",
         "FIELD_HEADER_HOSTNAME"      : "Hostname:",
+        "FIELD_HEADER_LOCALE"        : "Language/Locale ($LANG):",
         "FIELD_HEADER_USERNAME"      : "Username:",
         "FIELD_HEADER_PASSWORD"      : "Password:",
         "FIELD_HEADER_PASSPHRASE"    : "Passphrase:",
         "FIELD_HEADER_PORT"          : "Port:",
         "FIELD_HEADER_PRIVATE_KEY"   : "Private key:",
+        "FIELD_HEADER_SCROLLBACK"    : "Maximum scrollback size:",
         "FIELD_HEADER_READ_ONLY"     : "Read-only:",
         "FIELD_HEADER_RECORDING_EXCLUDE_MOUSE"  : "Exclude mouse:",
         "FIELD_HEADER_RECORDING_EXCLUDE_OUTPUT" : "Exclude graphics/streams:",
@@ -503,6 +599,7 @@
         "FIELD_HEADER_SERVER_ALIVE_INTERVAL" : "Server keepalive interval:",
         "FIELD_HEADER_SFTP_ROOT_DIRECTORY"   : "File browser root directory:",
         "FIELD_HEADER_TERMINAL_TYPE"   : "Terminal type:",
+        "FIELD_HEADER_TIMEZONE"        : "Time zone ($TZ):",
         "FIELD_HEADER_TYPESCRIPT_NAME" : "Typescript name:",
         "FIELD_HEADER_TYPESCRIPT_PATH" : "Typescript path:",
 
@@ -544,6 +641,7 @@
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentication",
         "SECTION_HEADER_BEHAVIOR"       : "Terminal behavior",
+        "SECTION_HEADER_CLIPBOARD"      : "Clipboard",
         "SECTION_HEADER_DISPLAY"        : "Display",
         "SECTION_HEADER_NETWORK"        : "Network",
         "SECTION_HEADER_RECORDING"      : "Screen Recording",
@@ -559,10 +657,15 @@
         "FIELD_HEADER_COLOR_SCHEME"   : "Color scheme:",
         "FIELD_HEADER_CREATE_RECORDING_PATH" : "Automatically create recording path:",
         "FIELD_HEADER_CREATE_TYPESCRIPT_PATH" : "Automatically create typescript path:",
+        "FIELD_HEADER_DISABLE_COPY"   : "Disable copying from terminal:",
+        "FIELD_HEADER_DISABLE_PASTE"  : "Disable pasting from client:",
         "FIELD_HEADER_FONT_NAME"      : "Font name:",
         "FIELD_HEADER_FONT_SIZE"      : "Font size:",
         "FIELD_HEADER_HOSTNAME"       : "Hostname:",
+        "FIELD_HEADER_LOGIN_FAILURE_REGEX" : "Login failure regular expression:",
+        "FIELD_HEADER_LOGIN_SUCCESS_REGEX" : "Login success regular expression:",
         "FIELD_HEADER_USERNAME"       : "Username:",
+        "FIELD_HEADER_USERNAME_REGEX" : "Username regular expression:",
         "FIELD_HEADER_PASSWORD"       : "Password:",
         "FIELD_HEADER_PASSWORD_REGEX" : "Password regular expression:",
         "FIELD_HEADER_PORT"           : "Port:",
@@ -572,6 +675,7 @@
         "FIELD_HEADER_RECORDING_INCLUDE_KEYS"   : "Include key events:",
         "FIELD_HEADER_RECORDING_NAME" : "Recording name:",
         "FIELD_HEADER_RECORDING_PATH" : "Recording path:",
+        "FIELD_HEADER_SCROLLBACK"     : "Maximum scrollback size:",
         "FIELD_HEADER_TERMINAL_TYPE"   : "Terminal type:",
         "FIELD_HEADER_TYPESCRIPT_NAME" : "Typescript name:",
         "FIELD_HEADER_TYPESCRIPT_PATH" : "Typescript path:",
@@ -614,6 +718,7 @@
 
         "SECTION_HEADER_AUTHENTICATION" : "Authentication",
         "SECTION_HEADER_BEHAVIOR"       : "Terminal behavior",
+        "SECTION_HEADER_CLIPBOARD"      : "Clipboard",
         "SECTION_HEADER_DISPLAY"        : "Display",
         "SECTION_HEADER_RECORDING"      : "Screen Recording",
         "SECTION_HEADER_TYPESCRIPT"     : "Typescript (Text Session Recording)",
@@ -630,9 +735,12 @@
         "FIELD_HEADER_CURSOR"           : "Cursor:",
         "FIELD_HEADER_DEST_HOST"        : "Destination host:",
         "FIELD_HEADER_DEST_PORT"        : "Destination port:",
+        "FIELD_HEADER_DISABLE_COPY"     : "Disable copying from remote desktop:",
+        "FIELD_HEADER_DISABLE_PASTE"    : "Disable pasting from client:",
         "FIELD_HEADER_ENABLE_AUDIO"     : "Enable audio:",
         "FIELD_HEADER_ENABLE_SFTP"      : "Enable SFTP:",
         "FIELD_HEADER_HOSTNAME"         : "Hostname:",
+        "FIELD_HEADER_USERNAME"         : "Username:",
         "FIELD_HEADER_PASSWORD"         : "Password:",
         "FIELD_HEADER_PORT"             : "Port:",
         "FIELD_HEADER_READ_ONLY"        : "Read-only:",
@@ -749,6 +857,7 @@
         "FIELD_HEADER_PASSWORD_OLD"       : "Current Password:",
         "FIELD_HEADER_PASSWORD_NEW"       : "New Password:",
         "FIELD_HEADER_PASSWORD_NEW_AGAIN" : "Confirm New Password:",
+        "FIELD_HEADER_TIMEZONE"           : "Timezone:",
         "FIELD_HEADER_USERNAME"           : "Username:",
         
         "HELP_DEFAULT_INPUT_METHOD" : "The default input method determines how keyboard events are received by Guacamole. Changing this setting may be necessary when using a mobile device, or when typing through an IME. This setting can be overridden on a per-connection basis within the Guacamole menu.",
@@ -756,7 +865,7 @@
         "HELP_INPUT_METHOD_NONE"    : "@:CLIENT.HELP_INPUT_METHOD_NONE",
         "HELP_INPUT_METHOD_OSK"     : "@:CLIENT.HELP_INPUT_METHOD_OSK",
         "HELP_INPUT_METHOD_TEXT"    : "@:CLIENT.HELP_INPUT_METHOD_TEXT",
-        "HELP_LANGUAGE"             : "Select a different language below to change the language of all text within Guacamole. Available choices will depend on which languages are installed.",
+        "HELP_LOCALE"               : "Options below are related to the locale of the user and will impact how various parts of the interface are displayed.",
         "HELP_MOUSE_MODE_ABSOLUTE"  : "@:CLIENT.HELP_MOUSE_MODE_ABSOLUTE",
         "HELP_MOUSE_MODE_RELATIVE"  : "@:CLIENT.HELP_MOUSE_MODE_RELATIVE",
         "HELP_UPDATE_PASSWORD"      : "If you wish to change your password, enter your current password and the desired new password below, and click \"Update Password\". The change will take effect immediately.",
@@ -788,7 +897,9 @@
 
         "SECTION_HEADER_USERS"       : "Users",
 
+        "TABLE_HEADER_FULL_NAME"   : "Full name",
         "TABLE_HEADER_LAST_ACTIVE" : "Last active",
+        "TABLE_HEADER_ORGANIZATION" : "Organization",
         "TABLE_HEADER_USERNAME"    : "Username"
 
     },
@@ -825,7 +936,7 @@
         
         "FORMAT_STARTDATE" : "@:APP.FORMAT_DATE_TIME_PRECISE",
 
-        "HELP_SESSIONS" : "All currently-active Guacamole sessions are listed here. If you wish to kill one or more sessions, check the box next to those sessions and click \"Kill Sessions\". Killing a session will immediately disconnect the user from the associated connection.",
+        "HELP_SESSIONS" : "This page will be populated with currently-active connections. The connections listed and the ability to kill those connections is dependent upon your access level. If you wish to kill one or more sessions, check the box next to those sessions and click \"Kill Sessions\". Killing a session will immediately disconnect the user from the associated connection.",
         
         "INFO_NO_SESSIONS" : "No active sessions",
 

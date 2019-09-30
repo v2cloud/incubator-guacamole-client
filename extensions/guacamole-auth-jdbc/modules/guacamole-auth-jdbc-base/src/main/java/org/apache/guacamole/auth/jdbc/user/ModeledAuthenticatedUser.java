@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.auth.jdbc.user;
 
+import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,7 +94,7 @@ public class ModeledAuthenticatedUser extends RemoteAuthenticatedUser {
      *     A ModeledUser object which is backed by the data associated with
      *     this user in the database.
      *
-     * @param credentials 
+     * @param credentials
      *     The credentials given by the user when they authenticated.
      */
     public ModeledAuthenticatedUser(AuthenticationProvider authenticationProvider,
@@ -107,7 +108,7 @@ public class ModeledAuthenticatedUser extends RemoteAuthenticatedUser {
      * Returns a ModeledUser object which is backed by the data associated with
      * this user within the database.
      *
-     * @return 
+     * @return
      *     A ModeledUser object which is backed by the data associated with
      *     this user in the database.
      */
@@ -167,6 +168,12 @@ public class ModeledAuthenticatedUser extends RemoteAuthenticatedUser {
     @Override
     public void setIdentifier(String identifier) {
         user.setIdentifier(identifier);
+    }
+    
+    @Override
+    public Set<String> getEffectiveUserGroups() {
+        return Sets.union(user.getEffectiveUserGroups(),
+                super.getEffectiveUserGroups());
     }
 
 }

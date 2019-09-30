@@ -34,7 +34,16 @@ angular.module('navigation').directive('guacMenu', [function guacMenu() {
              *
              * @type String
              */
-            menuTitle : '='
+            menuTitle : '=',
+
+            /**
+             * Whether the menu should remain open while the user interacts
+             * with the contents of the menu. By default, the menu will close
+             * if the user clicks within the menu contents.
+             *
+             * @type Boolean
+             */
+            interactive : '='
 
         },
 
@@ -51,6 +60,14 @@ angular.module('navigation').directive('guacMenu', [function guacMenu() {
              * @type Element
              */
             var element = $element[0];
+
+            /**
+             * The element containing the menu contents that display when the
+             * menu is open.
+             *
+             * @type Element
+             */
+            var contents = $element.find('.menu-contents')[0];
 
             /**
              * The main document object.
@@ -73,16 +90,19 @@ angular.module('navigation').directive('guacMenu', [function guacMenu() {
                 $scope.menuShown = !$scope.menuShown;
             };
 
-            // Close menu when use clicks anywhere else
-            document.body.addEventListener('click', function clickOutsideMenu() {
+            // Close menu when user clicks anywhere outside this specific menu
+            document.body.addEventListener('click', function clickOutsideMenu(e) {
                 $scope.$apply(function closeMenu() {
-                    $scope.menuShown = false;
+                    if (e.target !== element && !element.contains(e.target))
+                        $scope.menuShown = false;
                 });
             }, false);
 
-            // Prevent click within menu from triggering the outside-menu handler
-            element.addEventListener('click', function clickInsideMenu(e) {
-                e.stopPropagation();
+            // Prevent clicks within menu contents from toggling menu visibility
+            // if the menu contents are intended to be interactive
+            contents.addEventListener('click', function clickInsideMenuContents(e) {
+                if ($scope.interactive)
+                    e.stopPropagation();
             }, false);
 
         }] // end controller

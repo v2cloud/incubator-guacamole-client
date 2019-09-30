@@ -18,6 +18,8 @@
  */
 
 .keyboard-container {
+
+    display: none;
     text-align: center;
 
     width: 100%;
@@ -29,4 +31,9 @@
     opacity: 0.85;
 
     z-index: 1;
+
+}
+
+.keyboard-container.open {
+    display: block;
 }

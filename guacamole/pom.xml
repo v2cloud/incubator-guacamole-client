@@ -26,7 +26,7 @@
     <groupId>org.apache.guacamole</groupId>
     <artifactId>guacamole</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>guacamole</name>
     <url>http://guacamole.apache.org/</url>
 
@@ -257,28 +257,28 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.2</version>
+            <version>1.2.3</version>
         </dependency>
         
         <!-- Guacamole Java API -->
         <dependency>
             <groupId>org.apache.guacamole</groupId>
             <artifactId>guacamole-common</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- Guacamole Extension API -->
         <dependency>
             <groupId>org.apache.guacamole</groupId>
             <artifactId>guacamole-ext</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- Guacamole JavaScript API -->
         <dependency>
             <groupId>org.apache.guacamole</groupId>
             <artifactId>guacamole-common-js</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
             <type>zip</type>
             <scope>runtime</scope>
         </dependency>
@@ -492,6 +492,27 @@
                 </exclusion>
             </exclusions>
 
+        </dependency>
+        
+        <!-- Guava Base Libraries -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.0.1-jre</version>
+        </dependency>
+
+        <!-- JSTZ for TimeZone Detection -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>jstz</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+
+        <!-- Pickr (JavaScript color picker) -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>simonwep__pickr</artifactId>
+            <version>1.2.6</version>
         </dependency>
 
     </dependencies>
