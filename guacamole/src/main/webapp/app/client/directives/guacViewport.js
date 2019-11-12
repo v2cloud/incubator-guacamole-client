@@ -92,10 +92,10 @@ angular.module('client').directive('guacViewport', [function guacViewport() {
             };
 
             // Fit container within visible region when window scrolls
-            $window.addEventListener('scroll', fitVisibleArea);
+            //$window.addEventListener('scroll', fitVisibleArea);
 
             // Poll every 10ms, in case scroll event does not fire
-            var pollArea = $window.setInterval(fitVisibleArea, 10);
+            var pollArea = $window.setInterval(fitVisibleArea, 100000);
 
             // Clean up on destruction
             $scope.$on('$destroy', function destroyViewport() {
