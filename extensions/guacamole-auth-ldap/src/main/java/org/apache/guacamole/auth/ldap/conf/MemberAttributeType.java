@@ -17,18 +17,22 @@
  * under the License.
  */
 
-.keyboard-container {
+package org.apache.guacamole.auth.ldap.conf;
 
-    text-align: center;
+/**
+ * All possible means of describing membership within 
+ * LDAP group directory records.
+ */
+public enum MemberAttributeType {
 
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    /**
+     * group membership is specified by DN
+     */
+    DN,
 
-    border-top: 1px solid black;
-    background: #222;
-    opacity: 0.85;
-
-    z-index: 1;
+    /**
+     * group membership is specified by usercode
+     */
+    UID;
 
 }

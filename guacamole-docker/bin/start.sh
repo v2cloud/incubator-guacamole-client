@@ -201,6 +201,10 @@ END
         "mysql-default-max-group-connections-per-user" \
         "$MYSQL_DEFAULT_MAX_GROUP_CONNECTIONS_PER_USER"
 
+    set_optional_property     \
+        "mysql-user-required" \
+        "$MYSQL_USER_REQUIRED"
+
     # Add required .jar files to GUACAMOLE_LIB and GUACAMOLE_EXT
     ln -s /opt/guacamole/mysql/mysql-connector-*.jar "$GUACAMOLE_LIB"
     ln -s /opt/guacamole/mysql/guacamole-auth-*.jar "$GUACAMOLE_EXT"
@@ -323,6 +327,10 @@ END
     set_optional_property                                   \
         "postgresql-default-max-group-connections-per-user" \
         "$POSTGRES_DEFAULT_MAX_GROUP_CONNECTIONS_PER_USER"
+
+    set_optional_property          \
+        "postgresql-user-required" \
+        "$POSTGRES_USER_REQUIRED"
 
     # Add required .jar files to GUACAMOLE_LIB and GUACAMOLE_EXT
     ln -s /opt/guacamole/postgresql/postgresql-*.jar "$GUACAMOLE_LIB"
@@ -529,6 +537,21 @@ END
 }
 
 ##
+## Adds properties to guacamole.properties which configure the TOTP two-factor
+## authentication mechanism.
+##
+associate_totp() {
+    # Update config file
+    set_optional_property "totp-issuer"    "$TOTP_ISSUER"
+    set_optional_property "totp-digits"    "$TOTP_DIGITS"
+    set_optional_property "totp-period"    "$TOTP_PERIOD"
+    set_optional_property "totp-mode"      "$TOTP_MODE"
+
+    # Add required .jar files to GUACAMOLE_EXT
+    ln -s /opt/guacamole/totp/guacamole-auth-*.jar   "$GUACAMOLE_EXT"
+}
+
+##
 ## Adds properties to guacamole.properties which configure the Duo two-factor
 ## authentication service. Checks to see if all variables are defined and makes sure
 ## DUO_APPLICATION_KEY is >= 40 characters.
@@ -697,6 +720,11 @@ POSTGRES_DATABASE environment variables, or check Guacamole's Docker
 documentation regarding configuring LDAP and/or custom extensions.
 END
     exit 1;
+fi
+
+# Use TOTP if specified.
+if [ "$TOTP_ENABLED" = "true" ]; then
+    associate_totp
 fi
 
 # Use Duo if specified.
