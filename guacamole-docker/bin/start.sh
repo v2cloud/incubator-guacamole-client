@@ -800,7 +800,8 @@ fi
 
 
 # Use dynamic json-auth if specified
-if [ -n "$DYNAMIC_CONFIG_AGENT_URI" ]; then
+if [ -n "$DYNAMIC_CONFIG_AGENT_URI" -o -n "$JSON_SECRET_KEY" ]; then
+    set_property "json-secret-key" "$JSON_SECRET_KEY"
     set_property "dynamic-config-agent-uri" "$DYNAMIC_CONFIG_AGENT_URI"
     # no-need to link the jar since it happens manually
     INSTALLED_AUTH="$INSTALLED_AUTH json-auth"
